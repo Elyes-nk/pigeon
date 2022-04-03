@@ -8,7 +8,7 @@
 ## Techno
 - React native
 - Redux
-- styled components
+- Styled components
 
 ## Project content
 - Login
