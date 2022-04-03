@@ -1,0 +1,45 @@
+import React, { useContext } from 'react';
+import styled from 'styled-components';
+import Person from '../../components/Person'
+import { Context } from '../../context/Context';
+
+const people = [
+  {
+    id: 1,
+    name: "elyes",
+    image: "https://img-19.commentcamarche.net/WNCe54PoGxObY8PCXUxMGQ0Gwss=/480x270/smart/d8c10e7fd21a485c909a5b4c5d99e611/ccmcms-commentcamarche/20456790.jpg"
+  },
+  {
+    id: 2,
+    name: "elyes",
+    image: "https://img-19.commentcamarche.net/WNCe54PoGxObY8PCXUxMGQ0Gwss=/480x270/smart/d8c10e7fd21a485c909a5b4c5d99e611/ccmcms-commentcamarche/20456790.jpg"
+  },
+  {
+    id: 3,
+    name: "elyes",
+    image: "https://img-19.commentcamarche.net/WNCe54PoGxObY8PCXUxMGQ0Gwss=/480x270/smart/d8c10e7fd21a485c909a5b4c5d99e611/ccmcms-commentcamarche/20456790.jpg"
+  },
+  {
+    id: 4,
+    name: "elyes",
+    image: "https://img-19.commentcamarche.net/WNCe54PoGxObY8PCXUxMGQ0Gwss=/480x270/smart/d8c10e7fd21a485c909a5b4c5d99e611/ccmcms-commentcamarche/20456790.jpg"
+  },
+]
+const PeopleScreen = () => {
+  const { theme } = useContext(Context)
+
+
+  const WhiteFlatList = styled.FlatList`
+      background-color: ${theme.BACKGROUND_COLOR};
+  `
+  return(
+  <WhiteFlatList
+    data={people}
+    renderItem={({item}) => <Person person={item} />}
+    keyExtractor={({id}) => id}
+  />
+)}
+
+
+
+export default PeopleScreen;
