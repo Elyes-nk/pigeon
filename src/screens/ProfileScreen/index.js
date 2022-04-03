@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
-import { Context } from '../../context/Context';
+import {useSelector} from 'react-redux';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -12,8 +12,8 @@ import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 const ProfileScreen = () =>{
     const navigation = useNavigation();
-    const { setIsConnected, theme } = useContext(Context);
 
+    const theme = useSelector((state) => state.themeReducer.theme )
     const handleLogout = async() => {
         try{
             await AsyncStorage.removeItem("token")

@@ -1,10 +1,10 @@
-import React,{useState, useEffect, useContext} from 'react'
+import React,{useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Dimensions } from 'react-native'
-import { Context } from '../../context/Context';
+import {useSelector} from 'react-redux';
 
 function index({message}) {
-    const { theme } = useContext(Context)
+    const theme = useSelector((state) => state.themeReducer.theme )    
     const [height, setHeight] = useState(40);
     const [width, setWidth] = useState(100);
 

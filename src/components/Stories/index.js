@@ -1,7 +1,6 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import { FlatList } from 'react-native';
 import Story from '../Story';
-import { Context } from "../../context/Context";
 
 const Stories = () => {
   

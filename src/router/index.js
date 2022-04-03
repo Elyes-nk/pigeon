@@ -1,7 +1,6 @@
-import React, { useContext, useState, useEffect }from 'react';
+import React, { useState, useEffect }from 'react';
 import { createStackNavigator } from "@react-navigation/stack";
 import bottomHomeNavigator from './bottomHomeNavigator.routes';
-import { Context } from "../context/Context";
 import styled from 'styled-components'
 import { TouchableWithoutFeedback, StatusBar } from 'react-native'
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -18,17 +17,25 @@ import EditThemeScreen from '../screens/EditThemeScreen';
 import GalleryScreen from '../screens/GalleryScreen';
 import ProfilePicture from '../components/ProfilePicture';
 import RegisterScreen from '../screens/RegisterScreen'
+import {useDispatch, useSelector} from 'react-redux';
+import { init } from '../redux/actions/authActions';
 
 const Router = () => { 
-  const { isConnected, theme } = useContext(Context);
+  const theme = useSelector((state) => state.themeReducer.theme)
+  const user = useSelector((state) => state.authReducer.user)
   const navigation = useNavigation()
   const RootStack = createStackNavigator();
   const [isLoading, setisLoading] = useState(true);
+  const dispatch = useDispatch()
+
+
+  const checkUserInAsyncStorage = async() =>{
+    dispatch(init())
+  }
 
   useEffect(() => {
-   setTimeout(()=> {
+    await checkUserInAsyncStorage()
     setisLoading(false)
-   }, 1000)
   }, []);
 
   const Container = styled.View`
@@ -78,7 +85,7 @@ const Router = () => {
   <>
   <StatusBar barStyle={theme.MODE === 'light' ? "dark-content" : "light-content"} backgroundColor={theme.BACKGROUND_COLOR}/>
   <RootStack.Navigator>
-    {isConnected ? 
+    {user ? 
     <>
       <RootStack.Screen
         name={"Home"}

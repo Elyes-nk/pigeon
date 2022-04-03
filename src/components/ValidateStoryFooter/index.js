@@ -1,13 +1,14 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import styled from 'styled-components';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import ProfilePicture from '../ProfilePicture';
 import { useNavigation } from '@react-navigation/native';
-import { Context } from '../../context/Context';
+import {useSelector} from 'react-redux';
 
 function ValidateStoryFooter({handleCreateStory}) {
-    const { theme } = useContext(Context)
+    const theme = useSelector((state) => state.themeReducer.theme )
+
     const navigation = useNavigation()
 
     const BottomContainer = styled.View`

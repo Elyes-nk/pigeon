@@ -1,9 +1,8 @@
-import React, { useContext } from 'react';
-import {View ,Text} from "react-native";
+import React from 'react';
 import {createStackNavigator} from "@react-navigation/stack";
 import styled from 'styled-components'
 import PeopleScreen from "../screens/PeopleScreen";
-import { Context } from '../context/Context';
+import {useSelector} from 'react-redux';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import ProfilePicture from '../components/ProfilePicture';
@@ -13,7 +12,7 @@ const PeopleStack = createStackNavigator();
 const PeopleRoutes = () => {
 
   const navigation = useNavigation() 
-  const { theme } = useContext(Context)
+  const theme = useSelector((state) => state.themeReducer.theme )
 
   const Title = styled.Text`
     font-size: 20px;
@@ -25,7 +24,7 @@ const PeopleRoutes = () => {
     justify-content: space-between;
     width: 115px;
   `
-
+  const Text = styled.Text``
 
   return(
     <PeopleStack.Navigator>

@@ -1,15 +1,12 @@
 import { light } from '../../theme/Themes'
 
-import { SWITCH_THEME } from '../actions/themeActions'
-
-
 const initialState = {
     theme : light
 }
 
 const themeReducer = (state = initialState, action) => {
     switch(action.type){
-        case SWITCH_THEME:
+        case "SWITCH_THEME":
             return { theme : action.theme }
         default:
             return state;

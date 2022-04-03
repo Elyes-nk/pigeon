@@ -1,14 +1,13 @@
-import React, { useContext} from 'react';
+import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import ProfilePicture from "../ProfilePicture";
 import styled from 'styled-components';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import { Context } from '../../context/Context';
-
+import {useSelector} from 'react-redux';
 
 const Story = (props) => {
-  const { theme } = useContext(Context)
 
+  const theme = useSelector((state) => state.themeReducer.theme )
   const {
     story: {
       user: {

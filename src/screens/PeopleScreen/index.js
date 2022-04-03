@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Person from '../../components/Person'
-import { Context } from '../../context/Context';
+import {useSelector} from 'react-redux';
 
 const people = [
   {
@@ -26,8 +26,8 @@ const people = [
   },
 ]
 const PeopleScreen = () => {
-  const { theme } = useContext(Context)
 
+  const theme = useSelector((state) => state.themeReducer.theme )
 
   const WhiteFlatList = styled.FlatList`
       background-color: ${theme.BACKGROUND_COLOR};

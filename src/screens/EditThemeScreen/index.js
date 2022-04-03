@@ -1,27 +1,24 @@
-import React, {useState, useContext, useEffect } from 'react';
+import React, {useState, useEffect } from 'react';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { useDispatch } from 'react-redux'
 import { switchTheme } from '../../redux/actions/themeActions';
 import {light, dark} from '../../theme/Themes'
-import { Context } from '../../context/Context';
+import {useSelector} from 'react-redux';
 import styled from 'styled-components'
 
 
 const EditThemeScreen = () => {
 
   const dispatch = useDispatch();
-  const { theme } = useContext(Context)
+  const theme = useSelector((state) => state.themeReducer.theme )
 
   const editTheme = () => {
-    console.log("try");
     if(theme.MODE === "light"){
       dispatch(switchTheme(dark))
     }else{
       dispatch(switchTheme(light))
     }
   }
-
-
 
   const Container = styled.View`
     width: 100%;

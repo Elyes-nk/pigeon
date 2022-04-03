@@ -1,12 +1,11 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import ProfilePicture from '../ProfilePicture'
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import { Context } from '../../context/Context';
+import {useSelector} from 'react-redux';
 
 const Person = ({person}) => {
-  const { theme } = useContext(Context)
 
+  const theme = useSelector((state) => state.themeReducer.theme )
   const Container = styled.View`
       margin: 10px;
       flex-direction: row;

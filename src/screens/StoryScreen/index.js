@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, { useState } from 'react';
 import {
   ActivityIndicator,
   TouchableWithoutFeedback,
@@ -8,7 +8,7 @@ import {
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import styled from 'styled-components';
-import { Context } from '../../context/Context'
+import {useSelector} from 'react-redux';
 import ProfilePicture from "../../components/ProfilePicture";
 import { useNavigation } from '@react-navigation/native';
 
@@ -16,7 +16,10 @@ const StoryScreen = ({route}) => {
 
   const [activeStoryIndex, setActiveStoryIndex] = useState(0);
   const  { params : {userId} } = route;
-  const { stories, theme } = useContext(Context);
+
+
+  const theme = useSelector((state) => state.themeReducer.theme )
+
   const [nextUser, setNextUser] = useState(null);
   const navigation = useNavigation();
 

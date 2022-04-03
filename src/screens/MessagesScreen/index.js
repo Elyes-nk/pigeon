@@ -1,8 +1,8 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Message from '../../components/Message';
 import Stories from '../../components/Stories'
-import { Context } from '../../context/Context';
+import {useSelector} from 'react-redux';
 
 const messages = [
   {
@@ -35,8 +35,8 @@ const messages = [
 ]
 
 const MessagesScreen = () => {
-  const { theme } = useContext(Context)
 
+  const theme = useSelector((state) => state.themeReducer.theme )
   const WhiteFlatList = styled.FlatList`
       background-color: ${theme.BACKGROUND_COLOR};
   `

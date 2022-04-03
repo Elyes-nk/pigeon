@@ -1,15 +1,14 @@
-import React, { useState, useEffect, useContext} from 'react';
+import React, { useState, useEffect} from 'react';
 import styled from 'styled-components'
 import { launchImageLibrary} from 'react-native-image-picker';
 import RNFS from 'react-native-fs';
 import { useNavigation } from '@react-navigation/native';
-import { Context } from '../../context/Context';
+import {useSelector} from 'react-redux';
 
 export default function GalleryScreen() {
 
     const navigation = useNavigation() 
-    const { theme } = useContext(Context)
-
+    const theme = useSelector((state) => state.themeReducer.theme )
     const chooseImage = () => {
         let options = {
             storageOptions : {

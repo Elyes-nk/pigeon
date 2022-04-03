@@ -1,5 +1,4 @@
-import React, {useContext} from 'react';
-import {View ,Text} from "react-native";
+import React from 'react';
 import {createStackNavigator} from "@react-navigation/stack";
 import styled from 'styled-components'
 import MessagesScreen from "../screens/MessagesScreen";
@@ -9,14 +8,13 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import ProfilePicture from '../components/ProfilePicture';
 import RoundedIcon from '../components/RoundedIcon';
-import { Context } from '../context/Context';
-
+import {useSelector} from 'react-redux';
 
 
 const MessagesStack = createStackNavigator();
 
 const MessagesRoutes = () => {
-  const {theme} = useContext(Context)
+  const theme = useSelector((state) => state.themeReducer.theme )
   const navigation = useNavigation()
 
 
@@ -35,6 +33,9 @@ const MessagesRoutes = () => {
     justify-content: space-between;
     width: 90px;
   `
+  
+  const Text = styled.Text``
+
 
   return(
     <MessagesStack.Navigator>

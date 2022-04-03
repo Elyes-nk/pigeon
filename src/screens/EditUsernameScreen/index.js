@@ -1,11 +1,11 @@
-import React, {useState, useContext} from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components'
-import { Context } from '../../context/Context';
+import {useSelector} from 'react-redux';
 
 const EditUsernameScreen = () => {
   const [username, setUsername] = useState("Elyes");
-  const { theme } = useContext(Context)
 
+  const theme = useSelector((state) => state.themeReducer.theme )
 
   const Container = styled.View`
       width: 100%;

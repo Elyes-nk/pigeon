@@ -1,12 +1,12 @@
-import React, {useState , useContext} from 'react'
+import React, {useState } from 'react'
 import { RNCamera } from 'react-native-camera';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import styled from 'styled-components';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import { Context } from '../../context/Context';
+import {useSelector} from 'react-redux';
 
 function CameraFooter({captureHandle, cameraFlip, setCameraFlip}) {
-    const { theme } = useContext(Context)
+    const theme = useSelector((state) => state.themeReducer.theme )
 
     const handleCameraFlip = () => {
         if(cameraFlip === RNCamera.Constants.Type.back){

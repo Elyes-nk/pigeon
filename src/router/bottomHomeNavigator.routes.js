@@ -1,20 +1,18 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {Text} from 'react-native'
 import styled from 'styled-components'
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import MessagesStackScreen from './messages.routes';
 import PeopleStackScreen from "./people.routes";
-import { Context } from '../context/Context';
+import {useSelector} from 'react-redux';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 const Tab = createBottomTabNavigator();
 
 const BottomHomeNavigator = () => {
-  const { theme } = useContext(Context);
+  const theme = useSelector((state) => state.themeReducer.theme )
   
-
-
   const Container = styled.View`
     display: flex;
     align-items: center;

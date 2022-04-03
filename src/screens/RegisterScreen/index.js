@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
     Text, 
     Alert,
@@ -9,12 +9,11 @@ import styled from 'styled-components';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import logo from '../../assets/images/logo.png'
-import {Context} from '../../context/Context'
+import {useSelector} from 'react-redux';
 
 const RegisterScreen = () =>{
     const navigation = useNavigation();
-    const {theme} = useContext(Context)
-
+    const theme = useSelector((state) => state.themeReducer.theme )
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [name, setName] = useState("");

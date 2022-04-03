@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Keyboard, Dimensions } from 'react-native';
 import MessageSent from '../../components/MessageSent'
 import MessageRecieved from '../../components/MessageRecieved'
 import DiscussionFooter from '../../components/DiscussionFooter'
 import styled from 'styled-components';
-import { Context } from '../../context/Context';
+import {useSelector} from 'react-redux';
 
 const DiscussionScreen = () => {
 
@@ -80,7 +80,8 @@ const DiscussionScreen = () => {
       content: "TG on a compris ",
     },
   ]
-  const {theme} = useContext(Context)
+
+  const theme = useSelector((state) => state.themeReducer.theme )  
   const [height, setHeight] = useState(Dimensions.get('window').height);
 
   useEffect(() => {

@@ -1,13 +1,12 @@
-import React, { useState, useEffect, useContext}  from 'react';
+import React from 'react';
 import styled from 'styled-components'
 import ProfilePicture from '../ProfilePicture';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
-import { Context } from '../../context/Context';
+import {useSelector} from 'react-redux';
 
 const Message = ({ message }) => {
-  const { theme } = useContext(Context)
-
+  const theme = useSelector((state) => state.themeReducer.theme )
   const navigation = useNavigation();
 
   let msg = message?.content

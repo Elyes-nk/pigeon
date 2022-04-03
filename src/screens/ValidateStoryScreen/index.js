@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext }  from 'react';
+import React, { useState, useEffect }  from 'react';
 import styled from 'styled-components'
 import { SafeAreaView } from 'react-native';
-import { Context } from '../../context/Context'
+import {useSelector} from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import ValidateStoryFooter from '../../components/ValidateStoryFooter'
 
@@ -9,8 +9,8 @@ const ValidateStoryScreen = ({route}) => {
 
     const  { params : {path} } = route;
     const navigation = useNavigation();
-    const { stories, setStories } = useContext(Context);
-
+    const theme = useSelector((state) => state.themeReducer.theme )
+    
     const handleCreateStory = () => {
         if (image) {
         let newArray = stories;

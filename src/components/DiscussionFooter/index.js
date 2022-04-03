@@ -1,15 +1,14 @@
-import React, { useContext} from 'react'
+import React from 'react'
 import { TouchableWithoutFeedback  } from 'react-native';
 import styled from 'styled-components'
 import { Dimensions  } from 'react-native';
 import RoundedIcon from '../RoundedIcon'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import { Context } from '../../context/Context';
+import {useSelector} from 'react-redux';
 
 function index() {
-
-    const { theme } = useContext(Context)
+    const theme = useSelector((state) => state.themeReducer.theme )
 
     const Footer = styled.View`
         flex-direction: row;
