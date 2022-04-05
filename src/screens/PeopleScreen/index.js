@@ -1,42 +1,55 @@
 import React from 'react';
+import { ActivityIndicator } from 'react-native';
 import styled from 'styled-components';
 import Person from '../../components/Person'
+import { getUsers } from '../../redux/actions/usersActions';
 
-const people = [
-  {
-    id: 1,
-    name: "elyes",
-    image: "https://img-19.commentcamarche.net/WNCe54PoGxObY8PCXUxMGQ0Gwss=/480x270/smart/d8c10e7fd21a485c909a5b4c5d99e611/ccmcms-commentcamarche/20456790.jpg"
-  },
-  {
-    id: 2,
-    name: "elyes",
-    image: "https://img-19.commentcamarche.net/WNCe54PoGxObY8PCXUxMGQ0Gwss=/480x270/smart/d8c10e7fd21a485c909a5b4c5d99e611/ccmcms-commentcamarche/20456790.jpg"
-  },
-  {
-    id: 3,
-    name: "elyes",
-    image: "https://img-19.commentcamarche.net/WNCe54PoGxObY8PCXUxMGQ0Gwss=/480x270/smart/d8c10e7fd21a485c909a5b4c5d99e611/ccmcms-commentcamarche/20456790.jpg"
-  },
-  {
-    id: 4,
-    name: "elyes",
-    image: "https://img-19.commentcamarche.net/WNCe54PoGxObY8PCXUxMGQ0Gwss=/480x270/smart/d8c10e7fd21a485c909a5b4c5d99e611/ccmcms-commentcamarche/20456790.jpg"
-  },
-]
+
 const PeopleScreen = () => {
+  const dispatch = useDispatch()
+  const user = useSelector((state) => state.authReducer.user)
+  const users = useSelector((state) => state.usersReducer.users)
+  const [usersFiltred, setUsersFiltred] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  
+  const getUsersFromServeur = async() => {
+    await dispatch(getUsers(user.token))
+    await setUsersFiltred(users.filter(el => el._id !== user._id))
+    setIsLoading(false)
+  }
+
+  useEffect(() => {
+    getUsersFromServeur()
+  }, []);
 
 
   const WhiteFlatList = styled.FlatList`
       background-color: ${props => props.theme.BACKGROUND_COLOR};
   `
+
+  const Container = styled.View`
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  `
   return(
-  <WhiteFlatList
-    data={people}
-    renderItem={({item}) => <Person person={item} />}
-    keyExtractor={({id}) => id}
-  />
-)}
+    <>
+    {isLoading? 
+      <Container>
+        <ActivityIndicator/>
+      </Container>
+      :
+      <WhiteFlatList
+        data={usersFiltred}
+        renderItem={({item}) => <Person person={item} />}
+        keyExtractor={({id}) => id}
+      />
+    }
+    </>
+
+  )}
 
 
 

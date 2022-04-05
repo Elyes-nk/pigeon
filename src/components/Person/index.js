@@ -10,7 +10,6 @@ const Person = ({person}) => {
       align-items: center;
       width: 100%;
       height: 60px;
-
   `
 
   const Name = styled.Text`
@@ -22,8 +21,8 @@ const Person = ({person}) => {
   
   return (
     <Container>
-      <ProfilePicture uri={person?.image} size={55} />
-      <Name>{person?.name}</Name>
+      <ProfilePicture uri={`https://pigeon-chat-app-api.herokuapp.com/img/${person?.profilePic}`} size={55} />
+      <Name>{person?.username}</Name>
     </Container>
   )
 }

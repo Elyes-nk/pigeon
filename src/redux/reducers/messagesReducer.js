@@ -10,11 +10,11 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case GET_MESSAGES:
         return { 
-            messages: action.payload 
+            messages: action.messages 
         }
     case GET_DISCUSSION:
         return { 
-            discussion: action.payload 
+            discussion: action.discussion 
         }
     default:
       return state

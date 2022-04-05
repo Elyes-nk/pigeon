@@ -7,7 +7,10 @@ export const GET_DISCUSSION = 'GET_DISCUSSION'
 export const getMessages = (token) => { 
     return async dispatch => {
         try{
-            let res = await axios.post("https://pigeon-chat-app-api.herokuapp.com/api/messages/",
+            let res = await axios.post("https://pigeon-chat-app-api.herokuapp.com/api/messages/find",
+            {
+                id: id
+            },
             {
                 Headers:{
                     token: token
