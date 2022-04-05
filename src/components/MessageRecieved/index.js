@@ -1,11 +1,8 @@
 import React,{useState, useEffect } from 'react'
 import styled from 'styled-components'
 import ProfilePicture from '../ProfilePicture';
-import {useSelector} from 'react-redux';
 
 function index({message}) {
-    const theme = useSelector((state) => state.themeReducer.theme )
-
     const [height, setHeight] = useState(40);
     const [width, setWidth] = useState(100);
 
@@ -45,14 +42,14 @@ function index({message}) {
     const MessageContainer = styled.View`
         height: ${height}px;
         width: ${width}px;
-        background-color: ${theme.DISCUSSION_COLOR};
+        background-color: ${props => props.theme.DISCUSSION_COLOR};
         align-items: center;
         border-radius: 20px;
         margin-left: 10px;
     `
 
     const Message = styled.Text`
-        color: ${theme.TEXT_PRIMARY_COLOR};
+        color: ${props => props.theme.TEXT_PRIMARY_COLOR};
         padding: 10px;
     `
   return (

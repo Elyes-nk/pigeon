@@ -1,47 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import { 
-    Text, 
-    Alert,
-    TouchableWithoutFeedback,
-    ActivityIndicator
-     } from 'react-native'
+import { Text, Alert, TouchableWithoutFeedback, ActivityIndicator } from 'react-native'
 import styled from 'styled-components';
 import { useNavigation } from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import logo from '../../assets/images/logo.png'
-import {useSelector} from 'react-redux';
+import {register} from '../../redux/actions/authActions'
 
 const RegisterScreen = () =>{
     const navigation = useNavigation();
-    const theme = useSelector((state) => state.themeReducer.theme )
     const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const [name, setName] = useState("");
-
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [isValid, setIsValid] = useState(false);
     const [isFetching, setIsFetching] = useState(false);
 
     useEffect(() => {
-        if(name?.length > 3 && password?.length > 3){
+        if(email?.length > 3 && username?.length > 3 && password?.length > 3){
             setIsValid(true)
         }
-        if(password === confirmPassword){
-            setIsValid(true)
-        }
-    }, [name], [password]);
+    },[]);
  
     const handleRegister = async() => {
-        setIsFetching(true)
         if(isValid){
+            setIsFetching(true)
             try{
-            
-                navigation.navigate("Login")
+                await dispatch(register(email, username, password))
+                navigation.navigate("Home")
             }catch(err){
                 setIsFetching(false)
-                console.log("token not working");
-                console.log(err);
-                Alert.alert("Incorrect username or password",
-                "The credentials that you've entered doesn't appear to belong to an account. Please check your credentials and try again.",
+                Alert.alert("An error occured",
+                "Please check your credentials and try again.",
                 [
                     {
                     text: "Try again",
@@ -56,7 +43,7 @@ const RegisterScreen = () =>{
         align-items: center;
         width: 100%;
         height: 100%;
-        background-color: ${theme.BACKGROUND_COLOR};
+        background-color: ${props => props.theme.BACKGROUND_COLOR};
     `
     const Logo = styled.Image`
         margin-top: 40%;
@@ -69,7 +56,7 @@ const RegisterScreen = () =>{
         font-size: 14px;
         height: 45px;
         width: 90%;
-        background-color: ${theme.DISCUSSION_COLOR};
+        background-color: ${props => props.theme.DISCUSSION_COLOR};
         border-radius: 5px;
         border-width: 1px;
         border-color: lightgray;
@@ -85,6 +72,7 @@ const RegisterScreen = () =>{
         margin-bottom: 20px;
         align-items: center;
         justify-content: center;
+        background-color: ${isValid ? props => props.theme.PRIMARY_COLOR : "#b2dffc"};
     `
 
     const OrContainer = styled.View`
@@ -110,31 +98,28 @@ const RegisterScreen = () =>{
         <Logo source={logo} />
         <TextInput
             editable
-            placeholder="Phone number, email adress or username"
-            placeholderTextColor={theme.SECONDARY_COLOR}
-            value={name}
-            onChangeText={txt => setName(txt)}
+            placeholder="Email"
+            placeholderTextColor={props => props.theme.SECONDARY_COLOR}
+            value={email}
+            onChangeText={txt => setEmail(txt)}
+        />
+        <TextInput
+            editable
+            placeholder="Phone number or username"
+            placeholderTextColor={props => props.theme.SECONDARY_COLOR}
+            value={username}
+            onChangeText={txt => setUsername(txt)}
         />
         <TextInput
             editable
             placeholder="Password"
             secureTextEntry={true}
-            placeholderTextColor={theme.SECONDARY_COLOR}
+            placeholderTextColor={props => props.theme.SECONDARY_COLOR}
             value={password}
             onChangeText={txt => setPassword(txt)}
         />
-         <TextInput
-            editable
-            placeholder="Confirm password"
-            secureTextEntry={true}
-            placeholderTextColor={theme.SECONDARY_COLOR}
-            value={confirmPassword}
-            onChangeText={txt => setConfirmPassword(txt)}
-        />
         <TouchableWithoutFeedback onPress={handleRegister}>
-            <Btn 
-                style={isValid ? { backgroundColor: theme.PRIMARY_COLOR} :{ backgroundColor: '#b2dffc'}}
-            >
+            <Btn>
                 {
                     isFetching ? 
                     <ActivityIndicator/>
@@ -151,7 +136,7 @@ const RegisterScreen = () =>{
       
         <ForgotenContainer>
             <Text> Have already an account? </Text>
-            <TouchableWithoutFeedback onPress={navigation.navigate("Login")}>
+            <TouchableWithoutFeedback onPress={() => navigation.navigate("Login")}>
                 <Text style={{color: '#00376b'}}>Log in.</Text>
             </TouchableWithoutFeedback>
         </ForgotenContainer>

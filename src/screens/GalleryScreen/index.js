@@ -3,12 +3,10 @@ import styled from 'styled-components'
 import { launchImageLibrary} from 'react-native-image-picker';
 import RNFS from 'react-native-fs';
 import { useNavigation } from '@react-navigation/native';
-import {useSelector} from 'react-redux';
 
 export default function GalleryScreen() {
 
     const navigation = useNavigation() 
-    const theme = useSelector((state) => state.themeReducer.theme )
     const chooseImage = () => {
         let options = {
             storageOptions : {
@@ -44,7 +42,7 @@ export default function GalleryScreen() {
             flex: 1;
             align-items: center;
             justify-content: flex-end;
-            background-color: ${theme.BACKGROUND_COLOR};
+            background-color: ${props => props.theme.BACKGROUND_COLOR};
     `
 
     return (

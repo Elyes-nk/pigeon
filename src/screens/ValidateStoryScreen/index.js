@@ -1,7 +1,6 @@
 import React, { useState, useEffect }  from 'react';
 import styled from 'styled-components'
 import { SafeAreaView } from 'react-native';
-import {useSelector} from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import ValidateStoryFooter from '../../components/ValidateStoryFooter'
 
@@ -9,7 +8,6 @@ const ValidateStoryScreen = ({route}) => {
 
     const  { params : {path} } = route;
     const navigation = useNavigation();
-    const theme = useSelector((state) => state.themeReducer.theme )
     
     const handleCreateStory = () => {
         if (image) {

@@ -19,23 +19,23 @@ import ProfilePicture from '../components/ProfilePicture';
 import RegisterScreen from '../screens/RegisterScreen'
 import {useDispatch, useSelector} from 'react-redux';
 import { init } from '../redux/actions/authActions';
+import { initTheme } from '../redux/actions/themeActions';
 
 const Router = () => { 
-  const theme = useSelector((state) => state.themeReducer.theme)
-  const user = useSelector((state) => state.authReducer.user)
-  const navigation = useNavigation()
+  const user = useSelector((state) => state.authReducer.user);
+  const theme = useSelector((state) => state.themeReducer.theme);
+  const navigation = useNavigation();
   const RootStack = createStackNavigator();
   const [isLoading, setisLoading] = useState(true);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-
-  const checkUserInAsyncStorage = async() =>{
-    dispatch(init())
-  }
-
-  useEffect(() => {
-    await checkUserInAsyncStorage()
+  const checkUserAndThemeInAsyncStorage = async() =>{
+    await dispatch(init())
+    await dispatch(initTheme())
     setisLoading(false)
+  }
+  useEffect(() => {
+    checkUserAndThemeInAsyncStorage()
   }, []);
 
   const Container = styled.View`
@@ -44,7 +44,7 @@ const Router = () => {
     align-items: center;
     height: 100%;
     width: 100%;
-    background-color: ${theme.BACKGROUND_COLOR};
+    background-color: ${props => props.theme.BACKGROUND_COLOR};
   `
   const MainLogo = styled.Image`
     height: 100px;
@@ -53,13 +53,13 @@ const Router = () => {
 
   const Title = styled.Text`
     font-size: 20px;
-    color:${theme.TEXT_PRIMARY_COLOR};
+    color:${props => props.theme.TEXT_PRIMARY_COLOR};
     margin-left: 10px;
   `
 
   const SaveButton = styled.Text`
     font-size: 17px;
-    color:${theme.PRIMARY_COLOR};
+    color:${props => props.theme.PRIMARY_COLOR};
   `
 
   const ContainerLeft = styled.View`
@@ -83,7 +83,10 @@ const Router = () => {
 
   return(
   <>
-  <StatusBar barStyle={theme.MODE === 'light' ? "dark-content" : "light-content"} backgroundColor={theme.BACKGROUND_COLOR}/>
+  <StatusBar 
+    barStyle={theme.MODE === 'light' ? "dark-content" : "light-content"} 
+    backgroundColor={theme.BACKGROUND_COLOR}
+  />
   <RootStack.Navigator>
     {user ? 
     <>

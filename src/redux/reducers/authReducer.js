@@ -1,10 +1,19 @@
-const authReducer = (state, action) => {
+const initialState = {
+  user : null
+}
+
+
+const authReducer = (state = initialState, action) => {
     switch (action.type) {
       case "INIT":
         return {
           user: action.user,
         };
       case "LOGIN":
+        return {
+          user: action.user,
+        };
+      case "REGISTER":
         return {
           user: action.user,
         };

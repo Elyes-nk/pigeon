@@ -4,11 +4,8 @@ import styled from 'styled-components';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import ProfilePicture from '../ProfilePicture';
 import { useNavigation } from '@react-navigation/native';
-import {useSelector} from 'react-redux';
 
 function ValidateStoryFooter({handleCreateStory}) {
-    const theme = useSelector((state) => state.themeReducer.theme )
-
     const navigation = useNavigation()
 
     const BottomContainer = styled.View`
@@ -24,7 +21,7 @@ function ValidateStoryFooter({handleCreateStory}) {
     const TextContainer = styled.View`
         flex-direction: row;
         justify-content: center;
-        background-color: ${theme.BACKGROUND_COLOR};
+        background-color: ${props => props.theme.BACKGROUND_COLOR};
         align-items: center;
         margin-left: 10px;
         margin-right: 10px;
@@ -46,7 +43,7 @@ function ValidateStoryFooter({handleCreateStory}) {
         align-items: center;
         justify-content: center;
         border-radius: 45px; 
-        background-color: ${theme.ICON_PRIMARY_COLOR};
+        background-color: ${props => props.theme.ICON_PRIMARY_COLOR};
     `
     return (
         <BottomContainer>
@@ -67,7 +64,7 @@ function ValidateStoryFooter({handleCreateStory}) {
                 </TextContainer>
                 <Icon>
                     <TouchableWithoutFeedback onPress={handleCreateStory}>
-                        <AntDesign name="right" size={20} color={theme.ICON_SECONDARY_COLOR}/>
+                        <AntDesign name="right" size={20} color={props => props.theme.ICON_SECONDARY_COLOR}/>
                     </TouchableWithoutFeedback>
                 </Icon>
             </IconsContainer>

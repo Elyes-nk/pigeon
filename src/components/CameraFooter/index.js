@@ -6,7 +6,6 @@ import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import {useSelector} from 'react-redux';
 
 function CameraFooter({captureHandle, cameraFlip, setCameraFlip}) {
-    const theme = useSelector((state) => state.themeReducer.theme )
 
     const handleCameraFlip = () => {
         if(cameraFlip === RNCamera.Constants.Type.back){
@@ -18,7 +17,7 @@ function CameraFooter({captureHandle, cameraFlip, setCameraFlip}) {
 
 
     const BottomContainer = styled.View`
-        background-color: ${theme.BACKGROUND_COLOR};
+        background-color: ${props => props.theme.BACKGROUND_COLOR};
         justify-content: center;
         align-items: center;
         height: 80px;
@@ -35,7 +34,7 @@ function CameraFooter({captureHandle, cameraFlip, setCameraFlip}) {
         justify-content: center;
         align-items: center;
         border-width: 1px;
-        border-color: ${theme.TEXT_SECONDARY_COLOR};
+        border-color: ${props => props.theme.TEXT_SECONDARY_COLOR};
         margin-left: 10px;
         margin-right: 10px;
         padding-left: 10px;

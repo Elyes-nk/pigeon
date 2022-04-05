@@ -1,11 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import ProfilePicture from '../ProfilePicture'
-import {useSelector} from 'react-redux';
 
 const Person = ({person}) => {
 
-  const theme = useSelector((state) => state.themeReducer.theme )
   const Container = styled.View`
       margin: 10px;
       flex-direction: row;
@@ -17,7 +15,7 @@ const Person = ({person}) => {
 
   const Name = styled.Text`
       font-size: 17px;
-      color: ${theme.TEXT_PRIMARY_COLOR};
+      color: ${props => props.theme.TEXT_PRIMARY_COLOR};
       margin:10px;
   `
 

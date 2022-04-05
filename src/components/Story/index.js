@@ -3,11 +3,9 @@ import { useNavigation } from '@react-navigation/native';
 import ProfilePicture from "../ProfilePicture";
 import styled from 'styled-components';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import {useSelector} from 'react-redux';
 
 const Story = (props) => {
 
-  const theme = useSelector((state) => state.themeReducer.theme )
   const {
     story: {
       user: {
@@ -43,7 +41,7 @@ const Story = (props) => {
   const TextName = styled.Text`
     text-align: center;
     font-size: 12px;
-    color: ${theme.TEXT_PRIMARY_COLOR};
+    color: ${props => props.theme.TEXT_PRIMARY_COLOR};
   `
 
   return (

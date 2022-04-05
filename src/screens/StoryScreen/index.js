@@ -8,7 +8,6 @@ import {
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import styled from 'styled-components';
-import {useSelector} from 'react-redux';
 import ProfilePicture from "../../components/ProfilePicture";
 import { useNavigation } from '@react-navigation/native';
 
@@ -18,7 +17,6 @@ const StoryScreen = ({route}) => {
   const  { params : {userId} } = route;
 
 
-  const theme = useSelector((state) => state.themeReducer.theme )
 
   const [nextUser, setNextUser] = useState(null);
   const navigation = useNavigation();
@@ -85,18 +83,18 @@ const StoryScreen = ({route}) => {
       margin-top: 10px;
   `
   const UserName = styled.Text`
-      color: ${theme.TEXT_PRIMARY_COLOR};
+      color: ${props => props.theme.TEXT_PRIMARY_COLOR};
       font-weight: 700;
       font-size: 14px;
   `
   const PostedTime = styled.Text`
       margin-left: 10px;
       font-weight: 700;
-      color: ${theme.TEXT_SECONDARY_COLOR};
+      color: ${props => props.theme.TEXT_SECONDARY_COLOR};
       font-size: 13px;
   `
   const BottomContainer = styled.View`
-      background-color: ${theme.BACKGROUND_COLOR};
+      background-color: ${props => props.theme.BACKGROUND_COLOR};
   `
   const IconsContainer = styled.View`
       flex-direction: row;
@@ -111,7 +109,7 @@ const StoryScreen = ({route}) => {
 
   const TextInput = styled.TextInput`
       height: 100%;
-      color: ${theme.TEXT_PRIMARY_COLOR};
+      color: ${props => props.theme.TEXT_PRIMARY_COLOR};
       font-size: 14px;
   `
   const TextInputContainer = styled.View`

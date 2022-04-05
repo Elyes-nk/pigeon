@@ -1,16 +1,13 @@
 import React, {useState} from 'react';
 import styled from 'styled-components'
-import {useSelector} from 'react-redux';
 
 const EditUsernameScreen = () => {
   const [username, setUsername] = useState("Elyes");
 
-  const theme = useSelector((state) => state.themeReducer.theme )
-
   const Container = styled.View`
       width: 100%;
       height: 100%;
-      background-color: ${theme.BACKGROUND_COLOR};
+      background-color: ${props => props.theme.BACKGROUND_COLOR};
       align-items: center;
   `
 
@@ -18,21 +15,21 @@ const EditUsernameScreen = () => {
   const Name = styled.TextInput`
       width: 95%;
       border-bottom-width: 2px;
-      border-color: ${theme.TEXT_PRIMARY_COLOR};
-      color: ${theme.TEXT_PRIMARY_COLOR};
+      border-color: ${props => props.theme.TEXT_PRIMARY_COLOR};
+      color: ${props => props.theme.TEXT_PRIMARY_COLOR};
       padding: 5px;
       margin-top: 20px;
   `
 
   const NameLength = styled.Text`
       font-size: 12px;
-      color: ${theme.TEXT_SECONDARY_COLOR};
+      color: ${props => props.theme.TEXT_SECONDARY_COLOR};
   `
 
   const SmallText = styled.Text`
       margin: 30px 5px 0px 5px;
       font-size: 12px; 
-      color: ${theme.TEXT_SECONDARY_COLOR};
+      color: ${props => props.theme.TEXT_SECONDARY_COLOR};
   `
   return(
   <Container>

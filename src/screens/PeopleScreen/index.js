@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import Person from '../../components/Person'
-import {useSelector} from 'react-redux';
 
 const people = [
   {
@@ -27,10 +26,9 @@ const people = [
 ]
 const PeopleScreen = () => {
 
-  const theme = useSelector((state) => state.themeReducer.theme )
 
   const WhiteFlatList = styled.FlatList`
-      background-color: ${theme.BACKGROUND_COLOR};
+      background-color: ${props => props.theme.BACKGROUND_COLOR};
   `
   return(
   <WhiteFlatList

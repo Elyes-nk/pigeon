@@ -4,7 +4,6 @@ import { Dimensions } from 'react-native'
 import {useSelector} from 'react-redux';
 
 function index({message}) {
-    const theme = useSelector((state) => state.themeReducer.theme )    
     const [height, setHeight] = useState(40);
     const [width, setWidth] = useState(100);
 
@@ -44,7 +43,7 @@ function index({message}) {
         height: ${height}px;
         width: ${width}px;
         align-items: center;
-        background-color: ${theme.PRIMARY_COLOR};
+        background-color: ${props => props.theme.PRIMARY_COLOR};
         border-radius: 20px;
         margin-right: 5px;
     `

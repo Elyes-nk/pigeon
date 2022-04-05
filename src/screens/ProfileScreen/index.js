@@ -1,7 +1,5 @@
 import React from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
-import {useSelector} from 'react-redux';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -9,21 +7,21 @@ import RoundedIcon from '../../components/RoundedIcon'
 import ProfilePicture from '../../components/ProfilePicture';
 import styled from 'styled-components';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../redux/actions/authActions';
 
 const ProfileScreen = () =>{
     const navigation = useNavigation();
-
-    const theme = useSelector((state) => state.themeReducer.theme )
+    const dispatch = useDispatch()
     const handleLogout = async() => {
         try{
-            await AsyncStorage.removeItem("token")
-            setIsConnected(false)
+            await dispatch(logout())
             navigation.navigate("Login")
         }catch(err){console.log(err);}
     }
 
     const Container = styled.View`
-        background-color: ${theme.BACKGROUND_COLOR};
+        background-color: ${props => props.theme.BACKGROUND_COLOR};
         height: 100%;
         width: 100%;
     `
@@ -36,7 +34,7 @@ const ProfileScreen = () =>{
 
     const Title = styled.Text`
         font-size: 30px;
-        color: ${theme.TEXT_PRIMARY_COLOR};
+        color: ${props => props.theme.TEXT_PRIMARY_COLOR};
         margin: 20px;
     `
     const ContainerBottom = styled.View`
@@ -54,7 +52,7 @@ const ProfileScreen = () =>{
     const OptionTitle = styled.Text`
         font-size: 16px;
         padding: 10px;
-        color: ${theme.TEXT_PRIMARY_COLOR};
+        color: ${props => props.theme.TEXT_PRIMARY_COLOR};
     `
 
 
