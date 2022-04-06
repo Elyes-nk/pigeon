@@ -27,10 +27,10 @@ const LoginScreen = () =>{
         setIsFetching(true)
             try{
                 await dispatch(login(username,password))
-                setIsConnected(true)
                 navigation.navigate("Home")
             }catch(err){
                 setIsFetching(false)
+                console.log(err);
                 Alert.alert("Incorrect username or password",
                 "The credentials that you've entered doesn't appear to belong to an account. Please check your credentials and try again.",
                 [

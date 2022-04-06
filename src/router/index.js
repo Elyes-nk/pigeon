@@ -184,11 +184,7 @@ const Router = () => {
               <TouchableWithoutFeedback onPress={() => navigation.navigate("Profile")}> 
                <AntDesign name="left" size={28} color={theme.TEXT_PRIMARY_COLOR}/>
               </TouchableWithoutFeedback>
-              <ProfilePicture 
-                  uri={"https://img-19.commentcamarche.net/WNCe54PoGxObY8PCXUxMGQ0Gwss=/480x270/smart/d8c10e7fd21a485c909a5b4c5d99e611/ccmcms-commentcamarche/20456790.jpg"} 
-                  size={33} 
-              />
-              <Title>Bilal</Title>
+              <Title>Discussion</Title>
             </ContainerLeft>
           ),
         }}

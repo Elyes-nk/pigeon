@@ -26,11 +26,10 @@ export const login = (username, password) => {
                 username,
                 password
             });
-            console.log(user.data);
             await AsyncStorage.setItem('user', JSON.stringify(user.data))
             dispatch({
                 type: "LOGIN",
-                user: user
+                user: user.data
             })
         }catch(err){
             console.log(err);

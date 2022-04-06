@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components'
 
 const EditUsernameScreen = () => {
-  const [username, setUsername] = useState("Elyes");
+  const user = useSelector((state) => state.authReducer.user)
+  const [username, setUsername] = useState(user?.username);
 
   const Container = styled.View`
       width: 100%;

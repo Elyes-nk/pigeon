@@ -14,7 +14,8 @@ import {useSelector} from 'react-redux';
 const MessagesStack = createStackNavigator();
 
 const MessagesRoutes = () => {
-  const theme = useSelector((state) => state.themeReducer.theme )
+  const theme = useSelector((state) => state.themeReducer.theme)
+  const user = useSelector((state) => state.authReducer.user)
   const navigation = useNavigation()
 
 
@@ -58,7 +59,7 @@ const MessagesRoutes = () => {
             <ContainerLeft>
               <TouchableWithoutFeedback onPress={() => navigation.navigate("Profile")}> 
                 <ProfilePicture 
-                  uri={"https://img-19.commentcamarche.net/WNCe54PoGxObY8PCXUxMGQ0Gwss=/480x270/smart/d8c10e7fd21a485c909a5b4c5d99e611/ccmcms-commentcamarche/20456790.jpg"} 
+                  uri={`https://pigeon-chat-app-api.herokuapp.com/img/${user?.profilePic}`} 
                   size={33} 
                 />
               </TouchableWithoutFeedback>

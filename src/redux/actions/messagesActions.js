@@ -7,7 +7,7 @@ export const GET_DISCUSSION = 'GET_DISCUSSION'
 export const getMessages = (token) => { 
     return async dispatch => {
         try{
-            let res = await axios.post("https://pigeon-chat-app-api.herokuapp.com/api/messages/find",
+            let res = await axios.get("https://pigeon-chat-app-api.herokuapp.com/api/messages/find",
             {
                 id: id
             },
@@ -17,12 +17,14 @@ export const getMessages = (token) => {
                 }
             }
             );
+            console.log(res);
             dispatch({
                 type: "GET_MESSAGES",
                 messages: res.data
             })
         }catch(err){
             console.log(err);
+            console.log("messages dont work");
         }
     }
 };
@@ -30,7 +32,7 @@ export const getMessages = (token) => {
 export const getDiscussion = (token, id) => { 
     return async dispatch => {
         try{
-            let res = await axios.post("https://pigeon-chat-app-api.herokuapp.com/api/messages/find",
+            let res = await axios.get("https://pigeon-chat-app-api.herokuapp.com/api/messages/find",
             {
                 id: id
             },
@@ -46,6 +48,19 @@ export const getDiscussion = (token, id) => {
             })
         }catch(err){
             console.log(err);
+            console.log("discu dont work");
         }
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+

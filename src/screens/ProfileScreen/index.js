@@ -7,10 +7,11 @@ import RoundedIcon from '../../components/RoundedIcon'
 import ProfilePicture from '../../components/ProfilePicture';
 import styled from 'styled-components';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../redux/actions/authActions';
 
 const ProfileScreen = () =>{
+    const user = useSelector((state) => state.authReducer.user)
     const navigation = useNavigation();
     const dispatch = useDispatch()
     const handleLogout = async() => {
@@ -60,10 +61,10 @@ const ProfileScreen = () =>{
     <Container>
         <ContainerTop>
             <ProfilePicture 
-                uri={"https://img-19.commentcamarche.net/WNCe54PoGxObY8PCXUxMGQ0Gwss=/480x270/smart/d8c10e7fd21a485c909a5b4c5d99e611/ccmcms-commentcamarche/20456790.jpg"} 
+                uri={`https://pigeon-chat-app-api.herokuapp.com/img/${user?.profilePic}`} 
                 size={100}
             />
-            <Title>Elyes</Title>
+            <Title>{user?.username}</Title>
         </ContainerTop>
         <ContainerBottom>
             <Option>

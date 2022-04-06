@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ActivityIndicator } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
@@ -14,9 +14,8 @@ const MessagesScreen = () => {
   const [usersFiltred, setUsersFiltred] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-
   const getUsersFromServeur = async() => {
-    await dispatch(getUsers(user.token))
+    await dispatch(getUsers(user?.accessToken))
     await setUsersFiltred(users.filter(el => el._id !== user._id))
     setIsLoading(false)
   }
@@ -24,7 +23,6 @@ const MessagesScreen = () => {
   useEffect(() => {
     getUsersFromServeur()
   }, []);
-
 
   const WhiteFlatList = styled.FlatList`
       background-color: ${props => props.theme.BACKGROUND_COLOR};
@@ -36,7 +34,7 @@ const MessagesScreen = () => {
     align-items: center;
     justify-content: center;
   `
-
+  console.log("usersFiltred",usersFiltred);
   return(
     <>
       {isLoading ? 
@@ -45,8 +43,8 @@ const MessagesScreen = () => {
         </Container>
         :
         <WhiteFlatList
-          data={usersFiltred}
-          renderItem={({item}) => <Message user={item} />}
+          data={users}
+          renderItem={({item}) => <Message userSelected={item} />}
           keyExtractor={({id}) => id}
           ListHeaderComponent={Stories}
         />

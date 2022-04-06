@@ -7,8 +7,9 @@ import styled from 'styled-components';
 import {useDispatch, useSelector} from 'react-redux';
 import { getDiscussion } from '../../redux/actions/messagesActions';
 
-const DiscussionScreen = ({id}) => {
+const DiscussionScreen = ({route}) => {
   const dispatch = useDispatch()
+  const { params : {id} } = route;
   const user = useSelector((state) => state.authReducer.user)
   const discussion = useSelector((state) => state.messagesReducer.discussion)
   const [isLoading, setIsLoading] = useState(true);

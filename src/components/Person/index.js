@@ -17,7 +17,6 @@ const Person = ({person}) => {
       color: ${props => props.theme.TEXT_PRIMARY_COLOR};
       margin:10px;
   `
-
   
   return (
     <Container>

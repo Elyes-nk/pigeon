@@ -1,20 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ActivityIndicator } from 'react-native';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Person from '../../components/Person'
-import { getUsers } from '../../redux/actions/usersActions';
 
 
 const PeopleScreen = () => {
-  const dispatch = useDispatch()
   const user = useSelector((state) => state.authReducer.user)
   const users = useSelector((state) => state.usersReducer.users)
   const [usersFiltred, setUsersFiltred] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
   
   const getUsersFromServeur = async() => {
-    await dispatch(getUsers(user.token))
     await setUsersFiltred(users.filter(el => el._id !== user._id))
     setIsLoading(false)
   }
@@ -33,6 +30,7 @@ const PeopleScreen = () => {
     width: 100%;
     justify-content: center;
     align-items: center;
+    background-color: ${props => props.theme.BACKGROUND_COLOR};
   `
   return(
     <>
@@ -44,7 +42,7 @@ const PeopleScreen = () => {
       <WhiteFlatList
         data={usersFiltred}
         renderItem={({item}) => <Person person={item} />}
-        keyExtractor={({id}) => id}
+        keyExtractor={({item}) => item?._id}
       />
     }
     </>

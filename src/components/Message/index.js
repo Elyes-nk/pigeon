@@ -1,42 +1,65 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components'
 import ProfilePicture from '../ProfilePicture';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import axios from "axios";
+import { getDiscussion } from '../../redux/actions/messagesActions'
 
 const Message = ({ userSelected }) => {
   const user = useSelector((state) => state.authReducer.user)
+  const discussion = useSelector((state) => state.messagesReducer.discussion)
+  const dispatch = useDispatch()
+
+console.log(userSelected);
   const navigation = useNavigation();
   const [messages, setMessages] = useState([]);
-
-
+  
+  const getMessages = async() => {
+    await dispatch(getDiscussion(user?.accessToken,userSelected._id))
+    console.log(discussion);
+  }
+ 
+  // const getMessages = async () => {
+  //   try{
+  //     // let res = await axios.get("https://pigeon-chat-app-api.herokuapp.com/api/messages/find",
+  //     // {
+  //     //     id:userSelected._id
+  //     // },
+  //     // {
+  //     //     Headers:{
+  //     //         token:user?.accessToken
+  //     //     }
+  //     // }
+  //     // );
+  //     // console.log(res);
+  //     // setMessages(res.data)
+  //           let res = await axios.get("https://pigeon-chat-app-api.herokuapp.com/api/messages/find",
+  //           {
+  //             id:userSelected._id
+  //           },
+  //           {
+  //               Headers:{
+  //                   token: user.accessToken
+  //               }
+  //           }
+  //           );
+  //           console.log(res);
+  //   }catch(err){
+  //       console.log(err);
+  //       console.log("msg dnt work");
+  //   }
+  // }
   useEffect(() => {
-    const getMessages = () => {
-        try{
-          let res = await axios.post("https://pigeon-chat-app-api.herokuapp.com/api/messages/find",
-          {
-              id: userSelected._id
-          },
-          {
-              Headers:{
-                  token: user.token
-              }
-          }
-          );
-          setMessages(res.data)
-      }catch(err){
-          console.log(err);
-      }
-    }
     getMessages()
   }, []);
 
-  let message = messages[messages.length - 1]
-  let msg = messages[messages.length - 1]?.content
+  let message = messages[messages?.length - 1]
+  let msg = messages[messages?.length - 1]?.content
 
   const editMessage = () => {
-    if(msg.length>42){
+    if(msg?.length>42){
       msg = msg.substring(0,42)+"..."
     }
   }
@@ -77,11 +100,11 @@ const Message = ({ userSelected }) => {
   `
     
   return(
-    <TouchableWithoutFeedback onPress={() => navigation.navigate("Discussion") }>
+    <TouchableWithoutFeedback onPress={() => navigation.navigate("Discussion", {id: user?._id}) }>
       <Container>
         <ProfilePicture uri={`https://pigeon-chat-app-api.herokuapp.com/img/${userSelected?.profilePic}`} size={55} />
         <ContainerRight>
-          <Name>{user?.username}</Name>
+          <Name>{userSelected?.username}</Name>
           <MessageContainer>
             <Msg>{msg}</Msg>
             <Time>{message?.createdAt}</Time>

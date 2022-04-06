@@ -1,3 +1,5 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 export const initTheme = () => {
     return async dispatch => {
         try{
@@ -5,7 +7,7 @@ export const initTheme = () => {
             if(theme !== null){
                 dispatch({
                     type: "INIT_THEME",
-                    theme: theme
+                    theme: JSON.parse(theme)
                 })
             }
         }catch(err){
@@ -18,7 +20,7 @@ export const initTheme = () => {
 export const switchTheme = (theme) => { 
     return async dispatch => {
         try{
-            await AsyncStorage.setItem('theme', theme)
+            await AsyncStorage.setItem('theme', JSON.stringify(theme))
             dispatch({
                 type: "SWITCH_THEME",
                 theme: theme
