@@ -7,13 +7,16 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 const ValidateStoryScreen = ({route}) => {
+    
     const user = useSelector(state => state.authReducer.user)
     const  { params : {path} } = route;
+
     const uploadUri = `${Platform.OS === "android" ? 'file://' : ''}${path}`
+    const fileName = user.username + Date.now();
+
     const navigation = useNavigation();
-    
+
     const handleCreateStory = async() => {
-        const fileName = user.username + Date.now();
         const data = new FormData();
         data.append("file", {
             uri: uploadUri,
@@ -22,10 +25,10 @@ const ValidateStoryScreen = ({route}) => {
           });
         try {
             await axios.post("https://pigeon-chat-app-api.herokuapp.com/api/upload",data)
-            await axios.post("https://pigeon-chat-app-api.herokuapp.com/api/stories/",
+            await axios.put("https://pigeon-chat-app-api.herokuapp.com/api/users/",
                 {
-                    user : user._id,
-                    name : fileName
+                    id: user._id,
+                    stories : [...user.stories, fileName]
                 },{
                     headers: {
                         'token': user.accessToken,
@@ -34,7 +37,8 @@ const ValidateStoryScreen = ({route}) => {
                 }
             );
         }catch(error) { 
-            console.log(error.response);
+            console.log("error",error);
+            console.log("res",error.response);
         }
     }
 

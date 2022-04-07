@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, Alert, TouchableWithoutFeedback, ActivityIndicator } from 'react-native'
+import { Alert, TouchableWithoutFeedback, ActivityIndicator } from 'react-native'
 import styled from 'styled-components';
 import { useNavigation } from '@react-navigation/native';
 import logo from '../../assets/images/logo.png'
@@ -7,6 +7,7 @@ import { login } from '../../redux/actions/authActions';
 import { useDispatch } from 'react-redux';
 
 const LoginScreen = () =>{
+    
     const navigation = useNavigation();
     const dispatch = useDispatch();
     const [password, setPassword] = useState("");
@@ -30,7 +31,6 @@ const LoginScreen = () =>{
                 navigation.navigate("Home")
             }catch(err){
                 setIsFetching(false)
-                console.log(err);
                 Alert.alert("Incorrect username or password",
                 "The credentials that you've entered doesn't appear to belong to an account. Please check your credentials and try again.",
                 [
@@ -42,9 +42,6 @@ const LoginScreen = () =>{
         }
     }
 
-
-  
-  
     return(
     <Container>
         <Logo source={logo} />
@@ -135,6 +132,9 @@ const Or = styled.View`
     height: 1px;
     width: 40%;
 `
+const Text = styled.Text`
+    color: lightgray;
+`  
 
 const ForgotenContainer = styled.View`
     flex-direction: row;

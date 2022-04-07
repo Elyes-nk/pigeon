@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Text, Alert, TouchableWithoutFeedback, ActivityIndicator } from 'react-native'
+import { Alert, TouchableWithoutFeedback, ActivityIndicator } from 'react-native'
 import styled from 'styled-components';
 import { useNavigation } from '@react-navigation/native';
 import logo from '../../assets/images/logo.png'
 import {register} from '../../redux/actions/authActions'
+import { useDispatch } from 'react-redux';
 
-const RegisterScreen = () =>{
+const RegisterScreen = () => {
+
     const navigation = useNavigation();
+    const dispatch = useDispatch()
     const [password, setPassword] = useState("");
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -26,6 +29,7 @@ const RegisterScreen = () =>{
                 await dispatch(register(email, username, password))
                 navigation.navigate("Home")
             }catch(err){
+                console.log(err);
                 setIsFetching(false)
                 Alert.alert("An error occured",
                 "Please check your credentials and try again.",
@@ -64,7 +68,7 @@ const RegisterScreen = () =>{
             onChangeText={txt => setPassword(txt)}
         />
         <TouchableWithoutFeedback onPress={handleRegister}>
-            <Btn isFetching={isFetching}>
+            <Btn isValid={isValid}>
                 {
                     isFetching ? 
                     <ActivityIndicator/>
@@ -137,6 +141,9 @@ const Or = styled.View`
     height: 1px;
     width: 40%;
 `
+const Text = styled.Text`
+    color: lightgray;
+`  
 
 const ForgotenContainer = styled.View`
     flex-direction: row;

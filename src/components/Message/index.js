@@ -8,16 +8,17 @@ import axios from "axios";
 import { getDiscussion } from '../../redux/actions/messagesActions'
 
 const Message = ({ userSelected }) => {
+  console.log(userSelected);
   const user = useSelector((state) => state.authReducer.user)
-  const discussion = useSelector((state) => state.messagesReducer.discussion)
-  const dispatch = useDispatch()
 
   const navigation = useNavigation();
-  const [messages, setMessages] = useState([]);
+  // const discussion = useSelector((state) => state.messagesReducer.discussion)
+  // const dispatch = useDispatch()
+  // const [messages, setMessages] = useState([]);
   
-  const getMessages = async() => {
-    await dispatch(getDiscussion(user?.accessToken,userSelected._id))
-  }
+  // const getMessages = async() => {
+  //   await dispatch(getDiscussion(user?.accessToken,userSelected._id))
+  // }
  
   // const getMessages = async () => {
   //   try{
@@ -49,12 +50,18 @@ const Message = ({ userSelected }) => {
   //       console.log("msg dnt work");
   //   }
   // }
-  useEffect(() => {
-    getMessages()
-  }, []);
+  // useEffect(() => {
+  //   getMessages()
+  // }, []);
 
-  let message = messages[messages?.length - 1]
-  let msg = messages[messages?.length - 1]?.content
+  // let message = messages[messages?.length - 1]
+  // let msg = messages[messages?.length - 1]?.content
+
+
+  //JUST FOR PRESENTATION
+  let msg = `Salut ${userSelected?.username} comment ça va ?`
+  let message = { createdAt: "19:49"}
+
 
   const editMessage = () => {
     if(msg?.length>42){
