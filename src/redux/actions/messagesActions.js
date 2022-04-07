@@ -12,19 +12,17 @@ export const getMessages = (token) => {
                 id: id
             },
             {
-                Headers:{
-                    token: token
+                headers:{
+                    "token": token
                 }
             }
             );
-            console.log(res);
             dispatch({
                 type: "GET_MESSAGES",
                 messages: res.data
             })
         }catch(err){
             console.log(err);
-            console.log("messages dont work");
         }
     }
 };
@@ -37,8 +35,8 @@ export const getDiscussion = (token, id) => {
                 id: id
             },
             {
-                Headers:{
-                    token: token
+                headers:{
+                    "token": token
                 }
             }
             );
@@ -48,7 +46,6 @@ export const getDiscussion = (token, id) => {
             })
         }catch(err){
             console.log(err);
-            console.log("discu dont work");
         }
     }
 };

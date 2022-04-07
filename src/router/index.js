@@ -15,7 +15,6 @@ import { useNavigation } from '@react-navigation/native';
 import EditUsernameScreen from '../screens/EditUsernameScreen';
 import EditThemeScreen from '../screens/EditThemeScreen';
 import GalleryScreen from '../screens/GalleryScreen';
-import ProfilePicture from '../components/ProfilePicture';
 import RegisterScreen from '../screens/RegisterScreen'
 import {useDispatch, useSelector} from 'react-redux';
 import { init } from '../redux/actions/authActions';

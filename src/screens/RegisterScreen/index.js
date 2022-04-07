@@ -17,7 +17,7 @@ const RegisterScreen = () =>{
         if(email?.length > 3 && username?.length > 3 && password?.length > 3){
             setIsValid(true)
         }
-    },[]);
+    },[password]);
  
     const handleRegister = async() => {
         if(isValid){
@@ -37,61 +37,6 @@ const RegisterScreen = () =>{
             }
         }
     }
-
-
-    const Container = styled.View`
-        align-items: center;
-        width: 100%;
-        height: 100%;
-        background-color: ${props => props.theme.BACKGROUND_COLOR};
-    `
-    const Logo = styled.Image`
-        margin-top: 40%;
-        height: 70px;
-        width: 70px;
-        margin-bottom: 20px;
-    `
-
-    const TextInput = styled.TextInput`
-        font-size: 14px;
-        height: 45px;
-        width: 90%;
-        background-color: ${props => props.theme.DISCUSSION_COLOR};
-        border-radius: 5px;
-        border-width: 1px;
-        border-color: lightgray;
-        margin-bottom: 20px;
-    `
-
-    const Btn = styled.View`
-        flex-direction: row;
-        font-size: 14px;
-        height: 45px;
-        width: 90%;
-        border-radius: 5px;
-        margin-bottom: 20px;
-        align-items: center;
-        justify-content: center;
-        background-color: ${isValid ? props => props.theme.PRIMARY_COLOR : "#b2dffc"};
-    `
-
-    const OrContainer = styled.View`
-        flex-direction: row;
-        justify-content: space-between;
-        margin: 10px 10px 10px 10px;
-        align-items: center;
-    `
-
-    const Or = styled.View`
-        border-width: 1px;
-        border-color: lightgray;
-        height: 1px;
-        width: 40%;
-    `
-
-    const ForgotenContainer = styled.View`
-        flex-direction: row;
-    `       
 
     return(
     <Container>
@@ -119,7 +64,7 @@ const RegisterScreen = () =>{
             onChangeText={txt => setPassword(txt)}
         />
         <TouchableWithoutFeedback onPress={handleRegister}>
-            <Btn>
+            <Btn isFetching={isFetching}>
                 {
                     isFetching ? 
                     <ActivityIndicator/>
@@ -143,5 +88,58 @@ const RegisterScreen = () =>{
     </Container>
 )}
 
+const Container = styled.View`
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: ${props => props.theme.BACKGROUND_COLOR};
+`
+const Logo = styled.Image`
+    margin-top: 40%;
+    height: 70px;
+    width: 70px;
+    margin-bottom: 20px;
+`
+
+const TextInput = styled.TextInput`
+    font-size: 14px;
+    height: 45px;
+    width: 90%;
+    background-color: ${props => props.theme.DISCUSSION_COLOR};
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: lightgray;
+    margin-bottom: 20px;
+`
+
+const Btn = styled.View`
+    flex-direction: row;
+    font-size: 14px;
+    height: 45px;
+    width: 90%;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: center;
+    background-color: ${props => props.isValid ? props.theme.PRIMARY_COLOR : "#b2dffc"};
+`
+
+const OrContainer = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 10px 10px 10px 10px;
+    align-items: center;
+`
+
+const Or = styled.View`
+    border-width: 1px;
+    border-color: lightgray;
+    height: 1px;
+    width: 40%;
+`
+
+const ForgotenContainer = styled.View`
+    flex-direction: row;
+`           
 
 export default RegisterScreen;

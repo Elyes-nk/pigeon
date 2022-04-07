@@ -4,8 +4,11 @@ import styled from 'styled-components';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import ProfilePicture from '../ProfilePicture';
 import { useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 
 function ValidateStoryFooter({handleCreateStory}) {
+    const user = useSelector(state => state.authReducer.user)
+    const theme = useSelector(state => state.themeReducer.theme)
     const navigation = useNavigation()
 
     const BottomContainer = styled.View`
@@ -33,7 +36,7 @@ function ValidateStoryFooter({handleCreateStory}) {
     `
 
     const TextMessage = styled.Text`
-        color: white;
+        color: ${props => props.theme.TEXT_PRIMARY_COLOR};
         font-size: 13px;
         margin: 10px;
     `
@@ -50,8 +53,8 @@ function ValidateStoryFooter({handleCreateStory}) {
             <IconsContainer>  
                 <TextContainer>    
                     <ProfilePicture 
-                    uri={"https://img-19.commentcamarche.net/WNCe54PoGxObY8PCXUxMGQ0Gwss=/480x270/smart/d8c10e7fd21a485c909a5b4c5d99e611/ccmcms-commentcamarche/20456790.jpg"} 
-                    size={33} 
+                        uri={`https://pigeon-chat-app-api.herokuapp.com/img/${user?.profilePic}`} 
+                        size={33} 
                     />                
                     <TouchableWithoutFeedback onPress={handleCreateStory}>
                         <TextMessage>Your stories</TextMessage>     
@@ -64,7 +67,7 @@ function ValidateStoryFooter({handleCreateStory}) {
                 </TextContainer>
                 <Icon>
                     <TouchableWithoutFeedback onPress={handleCreateStory}>
-                        <AntDesign name="right" size={20} color={props => props.theme.ICON_SECONDARY_COLOR}/>
+                        <AntDesign name="right" size={20} color={theme.ICON_SECONDARY_COLOR}/>
                     </TouchableWithoutFeedback>
                 </Icon>
             </IconsContainer>

@@ -1,12 +1,13 @@
 import axios from 'axios'
 
-export const GET_USERS = 'GET_USERS'
+export const GET_STORIES = 'GET_STORIES'
 
 
-export const getUsers = (token) => { 
+export const getStories = (token) => { 
     return async dispatch => {
+        console.log("token",token);
         try{
-            let res = await axios.get("https://pigeon-chat-app-api.herokuapp.com/api/users/",
+            let res = await axios.get("https://pigeon-chat-app-api.herokuapp.com/api/stories",
             {
                 headers:{
                     "token": token
@@ -14,11 +15,15 @@ export const getUsers = (token) => {
             }
             );
             dispatch({
-                type: "GET_USERS",
-                users: res.data
+                type: "GET_STORIES",
+                stories: res.data
             })
         }catch(err){
             console.log(err);
         }
     }
 };
+
+
+
+

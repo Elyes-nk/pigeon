@@ -3,7 +3,6 @@ import { RNCamera } from 'react-native-camera';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import styled from 'styled-components';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import {useSelector} from 'react-redux';
 
 function CameraFooter({captureHandle, cameraFlip, setCameraFlip}) {
 

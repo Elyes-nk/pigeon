@@ -12,13 +12,11 @@ const Message = ({ userSelected }) => {
   const discussion = useSelector((state) => state.messagesReducer.discussion)
   const dispatch = useDispatch()
 
-console.log(userSelected);
   const navigation = useNavigation();
   const [messages, setMessages] = useState([]);
   
   const getMessages = async() => {
     await dispatch(getDiscussion(user?.accessToken,userSelected._id))
-    console.log(discussion);
   }
  
   // const getMessages = async () => {
@@ -65,40 +63,6 @@ console.log(userSelected);
   }
   editMessage()
 
-  const Container = styled.View`
-      flex-direction: row;
-      height: 60px;
-      width: 100%;
-      align-content: center;
-      margin: 10px;
-  `
-
-  const ContainerRight = styled.View`
-      margin-left: 2.5%;
-      width: 80%;
-  `
-
-  const MessageContainer = styled.View`
-      flex-direction: row;
-      justify-content: space-between;
-  `
-
-  const Name = styled.Text`
-      font-size: 18px;
-      color: ${props => props.theme.TEXT_PRIMARY_COLOR};
-  `
-
-  const Msg = styled.Text`
-      font-size: 12px;
-      color: ${props => props.theme.TEXT_SECONDARY_COLOR};
-  `
-
-  const Time = styled.Text`
-      font-size: 12px;
-      color: ${props => props.theme.TEXT_SECONDARY_COLOR};
-
-  `
-    
   return(
     <TouchableWithoutFeedback onPress={() => navigation.navigate("Discussion", {id: user?._id}) }>
       <Container>
@@ -113,5 +77,40 @@ console.log(userSelected);
       </Container>
     </TouchableWithoutFeedback>
 )}
+
+
+const Container = styled.View`
+  flex-direction: row;
+  height: 60px;
+  width: 100%;
+  align-content: center;
+  margin: 10px;
+`
+
+const ContainerRight = styled.View`
+  margin-left: 2.5%;
+  width: 80%;
+`
+
+const MessageContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+`
+
+const Name = styled.Text`
+  font-size: 18px;
+  color: ${props => props.theme.TEXT_PRIMARY_COLOR};
+`
+
+const Msg = styled.Text`
+  font-size: 12px;
+  color: ${props => props.theme.TEXT_SECONDARY_COLOR};
+`
+
+const Time = styled.Text`
+  font-size: 12px;
+  color: ${props => props.theme.TEXT_SECONDARY_COLOR};
+
+`
 
 export default Message;
