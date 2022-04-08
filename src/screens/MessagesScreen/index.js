@@ -36,8 +36,8 @@ const MessagesScreen = () => {
         :
         <WhiteFlatList
           data={usersFiltred}
-          renderItem={({user}) => <Message userSelected={user} />}
-          keyExtractor={({user}) => user?._id}
+          renderItem={({item}) => <Message userSelected={item} />}
+          keyExtractor={({item}) => item?._id}
           ListHeaderComponent={Stories}
         />
       }

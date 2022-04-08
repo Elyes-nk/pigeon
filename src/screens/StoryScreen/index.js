@@ -9,9 +9,12 @@ import ProfilePicture from "../../components/ProfilePicture";
 const StoryScreen = ({route}) => {
 
   const users = useSelector(state => state.usersReducer.users)
+  const theme = useSelector(state => state.themeReducer.theme)
+
+
   const [activeStoryIndex, setActiveStoryIndex] = useState(0);
   const  { params : {userId} } = route;
-  const UserStories = users.find(item => item.user.id === userId);
+  const UserStories = users.find(item => item._id === userId);
 
   const handleNextStory = () => {
     if (activeStoryIndex >= UserStories?.stories.length - 1) {
@@ -48,10 +51,11 @@ const StoryScreen = ({route}) => {
 
   const activeStory = UserStories.stories[activeStoryIndex]
 
+
   return (
     <Container>
       <TouchableWithoutFeedback onPress={handlePress}>
-        <BackImg source={`https://pigeon-chat-app-api.herokuapp.com/img/${activeStory}`}>
+        <BackImg source={{ uri : `https://pigeon-chat-app-api.herokuapp.com/img/${activeStory}`}}>
           <UserInfo>
             <ProfilePicture 
               uri={`https://pigeon-chat-app-api.herokuapp.com/img/${UserStories?.profilePic}`} 
@@ -66,14 +70,14 @@ const StoryScreen = ({route}) => {
                 <TextInput
                   editable
                   placeholder="Send message"
-                  placeholderTextColor={"white"}
+                  placeholderTextColor={theme.TEXT_PRIMARY_COLOR}
                 />
               </TextInputContainer>
               <MessageButton>
-                <AntDesign name="hearto" size={25} color={"white"} />
+                <AntDesign name="hearto" size={25} color={theme.TEXT_PRIMARY_COLOR} />
               </MessageButton>
               <MessageButton>
-                <Ionicons name="paper-plane-outline" size={25} color={"#ffffff"}/>
+                <Ionicons name="paper-plane-outline" size={25} color={theme.TEXT_PRIMARY_COLOR} />
               </MessageButton>
             </IconsContainer>
           </BottomContainer>
@@ -122,7 +126,7 @@ const MessageButton = styled.View`
 
 const TextInput = styled.TextInput`
   height: 100%;
-  color: ${props => props.theme.TEXT_PRIMARY_COLOR};
+  color: ${props => props.theme.DISCUSSION_COLOR};
   font-size: 14px;
 `
 const TextInputContainer = styled.View`

@@ -6,14 +6,15 @@ import Story from '../Story';
 const Stories = () => {
   
   const users = useSelector((state) => state.usersReducer.users)
+  console.log(users);
 
   return (
     <FlatList
       data={users}
-      keyExtractor={ user => user._id}
+      keyExtractor={ item => item._id}
       horizontal
       showsHorizontalScrollIndicator={false}
-      renderItem={({user}) => <Story story={user}/>}
+      renderItem={({item}) => item.stories.length > 0 && <Story user={item}/>}
     />
   )
 }

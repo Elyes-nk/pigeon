@@ -180,7 +180,7 @@ const Router = () => {
           },
           headerLeft: () => (
             <ContainerLeft>
-              <TouchableWithoutFeedback onPress={() => navigation.navigate("Profile")}> 
+              <TouchableWithoutFeedback onPress={() => navigation.navigate("Home")}> 
                <AntDesign name="left" size={28} color={theme.TEXT_PRIMARY_COLOR}/>
               </TouchableWithoutFeedback>
               <Title>Discussion</Title>
