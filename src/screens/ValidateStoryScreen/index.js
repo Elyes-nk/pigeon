@@ -17,10 +17,11 @@ const ValidateStoryScreen = ({route}) => {
     const navigation = useNavigation();
 
     const handleCreateStory = async() => {
+        console.log("letsssgooooo");
         const data = new FormData();
         data.append("file", {
             uri: uploadUri,
-            name: fileName,
+            name: "Elyes1649422408370",
             type: 'image/jpg',
           });
         try {
@@ -36,6 +37,7 @@ const ValidateStoryScreen = ({route}) => {
                     }
                 }
             );
+            console.log("success");
         }catch(error) { 
             console.log("error",error);
             console.log("res",error.response);

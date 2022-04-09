@@ -16,9 +16,7 @@ const ProfileScreen = () =>{
     const dispatch = useDispatch()
     const handleLogout = async() => {
         try{
-            console.log("a");
             await dispatch(logout())
-            console.log("b");
             navigation.navigate("Login")
         }catch(err){console.log(err);}
     }

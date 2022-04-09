@@ -1,50 +1,79 @@
 import React, { useState, useEffect } from 'react';
-import { ActivityIndicator } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import { Keyboard, Dimensions, ActivityIndicator } from 'react-native';
+import MessageSent from '../../components/MessageSent'
+import MessageRecieved from '../../components/MessageRecieved'
+import DiscussionFooter from '../../components/DiscussionFooter'
 import styled from 'styled-components';
-import Message from '../../components/Message';
-import Stories from '../../components/Stories'
-import { getUsers } from '../../redux/actions/usersActions';
+import { useSelector} from 'react-redux';
 
+const MessagesScreen = ({route}) => {
 
-const MessagesScreen = () => {
-
-  const dispatch = useDispatch()
-
+  const { params : {id} } = route;
   const user = useSelector((state) => state.authReducer.user)
-  const users = useSelector((state) => state.usersReducer.users)
+  const [isLoading, setIsLoading] = useState(false);
+  const [height, setHeight] = useState(Dimensions.get('window').height);
 
-  const [usersFiltred, setUsersFiltred] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const getFromServeur = async() => {
-    await dispatch(getUsers(user?.accessToken))
-    await setUsersFiltred(users.filter(el => el._id !== user._id))
-    setIsLoading(false)
-  }
+  const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    getFromServeur()
+    const getMessages = async () => {
+      try {
+        const res = await axios.get("https://pigeon-chat-app-api.herokuapp.com/api/messages/",
+        {
+          discussionId : id
+        });
+        setMessages(res.data);
+        setIsLoading(false)
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getMessages();
+  }, [id]);
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow',
+      (e) => { setHeight(Dimensions.get('window').height - e.endCoordinates.height); },
+    );
+    const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide',
+      () => { setHeight(Dimensions.get('window').height); },
+    );
+
+    return () => {
+      keyboardDidHideListener.remove();
+      keyboardDidShowListener.remove();
+    };
   }, []);
 
   return(
-    <>
-      {isLoading ? 
+  <>
+    {isLoading ? 
         <Container>
           <ActivityIndicator/>
         </Container>
         :
-        <WhiteFlatList
-          data={usersFiltred}
-          renderItem={({item}) => <Message userSelected={item} />}
-          keyExtractor={({item}) => item?._id}
-          ListHeaderComponent={Stories}
-        />
-      }
-    </>
+        <>
+          <List
+            height={height}
+            data={messages.reverse()}
+            renderItem={({item}) => 
+                item.sender._id === user._id ?
+                  <MessageSent message={item.text}/>
+                :
+                  <MessageRecieved message={item.text} />
+            }
+            keyExtractor={({item}) => item._id}
+            inverted
+          />
+          <DiscussionFooter />
+        </>
+    }
+  </>
 )}
 
-const WhiteFlatList = styled.FlatList`
+const List = styled.FlatList`
+  height: ${props => props.height}px;
+  width: 100%;
   background-color: ${props => props.theme.BACKGROUND_COLOR};
 `
 const Container = styled.View`
@@ -54,5 +83,6 @@ const Container = styled.View`
   align-items: center;
   justify-content: center;
 `
+
 
 export default MessagesScreen;

@@ -9,7 +9,7 @@ import CameraScreen from "../screens/CameraScreen";
 import LoginScreen from "../screens/LoginScreen";
 import StoryScreen from "../screens/StoryScreen";
 import MessagesScreen from '../screens/MessagesScreen';
-import DiscussionScreen from '../screens/DiscussionScreen';
+import DiscussionsScreen from '../screens/DiscussionsScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import { useNavigation } from '@react-navigation/native';
 import EditUsernameScreen from '../screens/EditUsernameScreen';
@@ -100,8 +100,8 @@ const Router = () => {
         }}
       />
       <RootStack.Screen
-        name="Messages"
-        component={MessagesScreen}
+        name="Discussions"
+        component={DiscussionsScreen}
         options={{
           headerShown: false,
           headerStyle:{
@@ -171,8 +171,8 @@ const Router = () => {
         }}
       />
       <RootStack.Screen
-        name="Discussion"
-        component={DiscussionScreen}
+        name="Messages"
+        component={MessagesScreen}
         options={{
           headerTitle: () => (<Title></Title>),
           headerStyle:{
@@ -183,7 +183,7 @@ const Router = () => {
               <TouchableWithoutFeedback onPress={() => navigation.navigate("Home")}> 
                <AntDesign name="left" size={28} color={theme.TEXT_PRIMARY_COLOR}/>
               </TouchableWithoutFeedback>
-              <Title>Discussion</Title>
+              <Title>Messages</Title>
             </ContainerLeft>
           ),
         }}

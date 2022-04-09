@@ -6,7 +6,6 @@ import Story from '../Story';
 const Stories = () => {
   
   const users = useSelector((state) => state.usersReducer.users)
-  console.log(users);
 
   return (
     <FlatList

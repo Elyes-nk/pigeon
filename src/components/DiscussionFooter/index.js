@@ -7,28 +7,6 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
 function index() {
-    const Footer = styled.View`
-        flex-direction: row;
-        height: 55px;
-        background-color: ${props => props.theme.BACKGROUND_COLOR};
-        justify-content: space-between;
-        align-items: center;
-    `
-
-    const TextInput = styled.TextInput`
-        color: ${props => props.theme.TEXT_PRIMARY_COLOR};
-        font-size: 14px;
-    `
-    const TextInputContainer = styled.View`
-        margin-left: 10px;
-        margin-right: 10px;
-        height: 40px;
-        width: ${Dimensions.get('window').width - 100}px;
-        border-radius: 20px;
-        background-color: ${props => props.theme.DISCUSSION_COLOR};
-        padding-left: 10px;
-    `
-
   return (
     <Footer>
         <TouchableWithoutFeedback onPress={() => navigation.navigate("Gallery")}>
@@ -50,5 +28,27 @@ function index() {
     </Footer>
   )
 }
+
+const Footer = styled.View`
+    flex-direction: row;
+    height: 55px;
+    background-color: ${props => props.theme.BACKGROUND_COLOR};
+    justify-content: space-between;
+    align-items: center;
+`
+
+const TextInput = styled.TextInput`
+    color: ${props => props.theme.TEXT_PRIMARY_COLOR};
+    font-size: 14px;
+`
+const TextInputContainer = styled.View`
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 40px;
+    width: ${Dimensions.get('window').width - 100}px;
+    border-radius: 20px;
+    background-color: ${props => props.theme.DISCUSSION_COLOR};
+    padding-left: 10px;
+`
 
 export default index

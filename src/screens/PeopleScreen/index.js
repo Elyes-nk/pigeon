@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { ActivityIndicator } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Person from '../../components/Person'
 
 
 const PeopleScreen = () => {
+  const dispatch = useDispatch()
   const user = useSelector((state) => state.authReducer.user)
   const users = useSelector((state) => state.usersReducer.users)
-  const [usersFiltred, setUsersFiltred] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   
   const getUsersFromServeur = async() => {
-    await setUsersFiltred(users.filter(el => el._id !== user._id))
+    await dispatch(getUsers(user?.accessToken))
     setIsLoading(false)
   }
 
@@ -20,18 +20,8 @@ const PeopleScreen = () => {
     getUsersFromServeur()
   }, []);
 
+  let usersFiltred = users.filter(el => el._id !== user._id)
 
-  const WhiteFlatList = styled.FlatList`
-      background-color: ${props => props.theme.BACKGROUND_COLOR};
-  `
-
-  const Container = styled.View`
-    height: 100%;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    background-color: ${props => props.theme.BACKGROUND_COLOR};
-  `
   return(
     <>
     {isLoading? 
@@ -48,6 +38,19 @@ const PeopleScreen = () => {
     </>
 
   )}
+
+
+  const WhiteFlatList = styled.FlatList`
+    background-color: ${props => props.theme.BACKGROUND_COLOR};
+  `
+
+  const Container = styled.View`
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: ${props => props.theme.BACKGROUND_COLOR};
+  `
 
 
 
