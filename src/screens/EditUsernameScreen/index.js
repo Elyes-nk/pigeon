@@ -41,7 +41,7 @@ const EditUsernameScreen = () => {
 
   return(
   <Container>
-     <ContainerRight>
+     <ContainerTop>
       <Name
         value={username}
         onChangeText={txt => setUsername(txt)}
@@ -53,7 +53,7 @@ const EditUsernameScreen = () => {
             <ActivityIndicator />
         }
       </TouchableWithoutFeedback>
-    </ContainerRight>
+    </ContainerTop>
  
     <NameLength>{username.length}/30</NameLength>
     <Info>{info}</Info>
@@ -70,7 +70,7 @@ const Container = styled.View`
   align-items: center;
 `
 
-const ContainerRight = styled.View`
+const ContainerTop = styled.View`
   margin-top: 20px;  
   width: 100%;
   flex-direction: row;
