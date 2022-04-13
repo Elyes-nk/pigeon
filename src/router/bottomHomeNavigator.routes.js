@@ -2,7 +2,7 @@ import React from 'react';
 import {Text} from 'react-native'
 import styled from 'styled-components'
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
-import MessagesStackScreen from './messages.routes';
+import DiscussionsStackScreen from './discussions.routes';
 import PeopleStackScreen from "./people.routes";
 import {useSelector} from 'react-redux';
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -22,11 +22,11 @@ const BottomHomeNavigator = () => {
   <Tab.Navigator
     screenOptions={({ route }) => ({
       tabBarIcon: ({ focused, color, size }) => {
-        if (route.name === 'MessagesTab') {
+        if (route.name === 'DiscussionsTab') {
           return  (
             <Container>
               <MaterialCommunityIcons name='message' color={color} size={22}  />
-              <Text style={{color:`${color}`}}>Messages</Text>
+              <Text style={{color:`${color}`}}>Discussions</Text>
             </Container>
             )
         }
@@ -51,8 +51,8 @@ const BottomHomeNavigator = () => {
     }}
   >
     <Tab.Screen 
-      name="MessagesTab" 
-      component={MessagesStackScreen}
+      name="DiscussionsTab" 
+      component={DiscussionsStackScreen}
       options={{
         headerShown: false
       }}

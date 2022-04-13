@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { ActivityIndicator } from 'react-native';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Discussion from '../../components/Discussion';
 import Stories from '../../components/Stories'
-
+import axios from 'axios'
 
 const DiscussionsScreen = () => {
+
+  const user = useSelector(state => state.authReducer.user)
 
   const [isLoading, setIsLoading] = useState(true);
   const [discussions, setDiscussions] = useState([]);
@@ -13,10 +16,10 @@ const DiscussionsScreen = () => {
   useEffect(() => {
     const getDiscussions = async () => {
       try {
-        const res = await axios.get("https://pigeon-chat-app-api.herokuapp.com/api/discussions/", 
+        const res = await axios.get(`https://pigeon-chat-app-api.herokuapp.com/api/discussions/${user._id}`,
         {
-          userId: user._id
-        });
+          headers: {'token': user.accessToken}
+        })
         setDiscussions(res.data);
         setIsLoading(false);
       } catch (err) {
@@ -36,7 +39,7 @@ const DiscussionsScreen = () => {
         <WhiteFlatList
           data={discussions}
           renderItem={({item}) => <Discussion discussion={item} />}
-          keyExtractor={({item}) => item?._id}
+          keyExtractor={item => item?._id}
           ListHeaderComponent={Stories}
         />
       }

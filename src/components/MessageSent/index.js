@@ -1,18 +1,17 @@
 import React,{useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Dimensions } from 'react-native'
-import {useSelector} from 'react-redux';
 
-function index({message}) {
+function index({text}) {
     const [height, setHeight] = useState(40);
     const [width, setWidth] = useState(100);
 
     const GetWidth = () => {
-        if(message.length < 10){
+        if(text.length < 10){
             setWidth(100)
             return;
         }
-        if(message.length < 20){
+        if(text.length < 20){
             setWidth(200)
             return;
         }
@@ -20,7 +19,7 @@ function index({message}) {
         return;
     }
     const GetHeight = () => {
-        let lignes  = message.length / 32
+        let lignes  = text.length / 32
         setHeight(height + (20 * Math.floor(lignes)))
     }
     useEffect(() => {
@@ -55,7 +54,7 @@ function index({message}) {
       <Container>
           <Box></Box>
           <MessageContainer>
-            <Message>{message}</Message>
+            <Message>{text}</Message>
           </MessageContainer>
       </Container>
   )

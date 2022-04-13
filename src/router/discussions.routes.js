@@ -1,7 +1,7 @@
 import React from 'react';
 import {createStackNavigator} from "@react-navigation/stack";
 import styled from 'styled-components'
-import MessagesScreen from "../screens/MessagesScreen";
+import DiscussionsScreen from "../screens/DiscussionsScreen";
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
@@ -11,40 +11,20 @@ import RoundedIcon from '../components/RoundedIcon';
 import {useSelector} from 'react-redux';
 
 
-const MessagesStack = createStackNavigator();
+const DiscussionsStack = createStackNavigator();
 
-const MessagesRoutes = () => {
+const DiscussionsRoutes = () => {
   const theme = useSelector((state) => state.themeReducer.theme)
   const user = useSelector((state) => state.authReducer.user)
   const navigation = useNavigation()
 
-
-  const ContainerLeft = styled.View`
-    flex-direction: row;
-    justify-content: space-between;
-    width: 145px;
-  `
-  const Title = styled.Text`
-    font-size: 20px;
-    color:${theme.TEXT_PRIMARY_COLOR};
-  `
-
-  const ContainerRight = styled.View`
-    flex-direction: row;
-    justify-content: space-between;
-    width: 90px;
-  `
-  
-  const Text = styled.Text``
-
-
   return(
-    <MessagesStack.Navigator>
-      <MessagesStack.Screen
-        name="MessagesStack"
-        component={MessagesScreen}
+    <DiscussionsStack.Navigator>
+      <DiscussionsStack.Screen
+        name="DiscussionsStack"
+        component={DiscussionsScreen}
         options={{
-          title: 'Messages',
+          title: 'Discussions',
           headerStyle:{
             backgroundColor: theme.BACKGROUND_COLOR,
           },
@@ -63,7 +43,7 @@ const MessagesRoutes = () => {
                   size={33} 
                 />
               </TouchableWithoutFeedback>
-              <Title>Messages</Title>
+              <Title>Discussions</Title>
             </ContainerLeft>
           ),
           headerRight: () => (
@@ -82,9 +62,28 @@ const MessagesRoutes = () => {
           )
         }}
       />
-    </MessagesStack.Navigator>
+    </DiscussionsStack.Navigator>
   )
 }
 
 
-export default MessagesRoutes;
+
+const ContainerLeft = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+`
+const Title = styled.Text`
+  font-size: 20px;
+  margin-left: 10px;
+  color:${props => props.theme.TEXT_PRIMARY_COLOR};
+`
+
+const ContainerRight = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  width: 90px;
+`
+
+const Text = styled.Text``
+
+export default DiscussionsRoutes;

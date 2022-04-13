@@ -2,7 +2,7 @@ import React,{useState, useEffect } from 'react'
 import styled from 'styled-components'
 import ProfilePicture from '../ProfilePicture';
 
-function index({message}) {
+function index({text, profilePic}) {
     const [height, setHeight] = useState(40);
     const [width, setWidth] = useState(100);
 
@@ -12,11 +12,11 @@ function index({message}) {
     }, []);
 
     const GetWidth = () => {
-        if(message.length < 10){
+        if(text.length < 10){
             setWidth(100)
             return;
         }
-        if(message.length < 20){
+        if(text.length < 20){
             setWidth(200)
             return;
         }
@@ -25,7 +25,7 @@ function index({message}) {
     }
 
     const GetHeight = () => {
-        let lignes  = message.length / 32
+        let lignes  = text.length / 32
         setHeight(height + (20 * Math.floor(lignes)))
     }
 
@@ -55,11 +55,11 @@ function index({message}) {
   return (
       <Container>
           <ProfilePicture 
-                uri={`https://pigeon-chat-app-api.herokuapp.com/img/profile.png`} 
+                uri={`https://pigeon-chat-app-api.herokuapp.com/img/${profilePic}`} 
                 size={40} 
             />
           <MessageContainer>
-              <Message>{message}</Message>
+              <Message>{text}</Message>
           </MessageContainer>
       </Container>
   )

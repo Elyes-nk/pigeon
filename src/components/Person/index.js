@@ -10,7 +10,7 @@ const Person = ({person}) => {
   const navigation = useNavigation()
   
   return (
-    <TouchableWithoutFeedback onPress={() => navigation.navigate("Discussion", {id: person?._id}) }>
+    <TouchableWithoutFeedback onPress={() => navigation.navigate("Messages", {userSelected: person}) }>
       <Container>
           <ProfilePicture uri={`https://pigeon-chat-app-api.herokuapp.com/img/${person?.profilePic}`} size={55} />
           <Name>{person?.username}</Name>

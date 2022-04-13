@@ -4,24 +4,40 @@ import ProfilePicture from '../ProfilePicture';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector} from 'react-redux';
+import axios from 'axios';
 
 const Discussion = ({ discussion }) => {
 
   const user = useSelector((state) => state.authReducer.user)
-  let userSelected = discussion?.members?.find( u => u._id !== user._id)
+  let userSelectedId = discussion?.members?.find( u => u !== user._id)
+
+  const [userSelected, setUserSelected] = useState(null);
+
+  const getUserSelected = async () => {
+    try{  
+      const res = await axios.get(`https://pigeon-chat-app-api.herokuapp.com/api/users/find/${userSelectedId}`,
+      {
+        headers: {'token': user.accessToken}
+      })
+      setUserSelected(res.data)
+    }catch(err){
+      console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    getUserSelected()
+  }, []);
+
 
   const navigation = useNavigation();
  
   return(
-    <TouchableWithoutFeedback onPress={() => navigation.navigate("Messages", {id: discussion?._id}) }>
+    <TouchableWithoutFeedback onPress={() => navigation.navigate("Messages", {userSelected: userSelected}) }>
       <Container>
         <ProfilePicture uri={`https://pigeon-chat-app-api.herokuapp.com/img/${userSelected?.profilePic}`} size={55} />
         <ContainerRight>
           <Name>{userSelected?.username}</Name>
-          {/* <MessageContainer>
-            <Msg>{msg}</Msg>
-            <Time>{message?.createdAt}</Time>
-          </MessageContainer> */}
         </ContainerRight>
       </Container> 
     </TouchableWithoutFeedback>
@@ -37,8 +53,9 @@ const Container = styled.View`
 `
 
 const ContainerRight = styled.View`
-  margin-left: 2.5%;
+  margin-left: 10px;
   width: 80%;
+  justify-content: center;
 `
 
 const MessageContainer = styled.View`
