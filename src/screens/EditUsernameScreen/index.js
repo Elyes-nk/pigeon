@@ -75,15 +75,15 @@ const ContainerRight = styled.View`
   width: 100%;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
 `
 
 const Name = styled.TextInput`
-  width: 80%;
+  width: 350px;
   border-bottom-width: 2px;
   border-color: ${props => props.theme.TEXT_PRIMARY_COLOR};
   color: ${props => props.theme.TEXT_PRIMARY_COLOR};
   padding: 5px;
+  margin-left: 5px;
 `
 
 const SaveButton = styled.Text`
