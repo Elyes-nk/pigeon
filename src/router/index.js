@@ -37,39 +37,6 @@ const Router = () => {
     checkUserAndThemeInAsyncStorage()
   }, []);
 
-  const Container = styled.View`
-    flex: 1;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    background-color: ${props => props.theme.BACKGROUND_COLOR};
-  `
-  const MainLogo = styled.Image`
-    height: 100px;
-    width: 100px;
-  `
-
-  const Title = styled.Text`
-    font-size: 20px;
-    color:${props => props.theme.TEXT_PRIMARY_COLOR};
-    margin-left: 10px;
-  `
-
-  const SaveButton = styled.Text`
-    font-size: 17px;
-    color:${props => props.theme.PRIMARY_COLOR};
-  `
-
-  const ContainerLeft = styled.View`
-    flex-direction: row;
-    padding: 10px;
-  `
-
-  const ContainerRight = styled.View`
-    padding: 10px;
-  `
-
   if(isLoading){
     return(
       <Container>
@@ -142,14 +109,7 @@ const Router = () => {
               </TouchableWithoutFeedback>
               <Title>Username</Title>
             </ContainerLeft>
-          ),
-          headerRight: () => (
-            <ContainerRight>
-              <TouchableWithoutFeedback onPress={() => navigation.navigate("Profile")}> 
-                <SaveButton>Save</SaveButton>
-              </TouchableWithoutFeedback>
-            </ContainerRight>
-          ),
+          )
         }}
       />
       <RootStack.Screen
@@ -273,6 +233,31 @@ const Router = () => {
 </>
 );
 }
+
+
+const Container = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-color: ${props => props.theme.BACKGROUND_COLOR};
+`
+const MainLogo = styled.Image`
+  height: 100px;
+  width: 100px;
+`
+
+const Title = styled.Text`
+  font-size: 20px;
+  color:${props => props.theme.TEXT_PRIMARY_COLOR};
+  margin-left: 10px;
+`
+
+const ContainerLeft = styled.View`
+  flex-direction: row;
+  padding: 10px;
+`
 
 
 export default Router;

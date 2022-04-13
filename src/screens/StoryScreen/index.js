@@ -89,6 +89,7 @@ const StoryScreen = ({route}) => {
 
 const Container = styled.SafeAreaView`
   height: 100%;
+  background-color: black;
 `
 const BackImg = styled.ImageBackground`
   flex: 1;
@@ -97,12 +98,14 @@ const BackImg = styled.ImageBackground`
 const UserInfo = styled.View`
   flex-direction: row;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 30px;
+  margin-left: 10px;
 `
 const UserName = styled.Text`
   color: ${props => props.theme.TEXT_PRIMARY_COLOR};
   font-weight: 700;
   font-size: 14px;
+  margin-left: 5px;
 `
 const PostedTime = styled.Text`
   margin-left: 10px;
