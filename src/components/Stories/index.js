@@ -11,7 +11,6 @@ const Stories = () => {
 
   const getUsersFromServeur = async() => {
     await dispatch(getUsers())
-    setIsLoading(false)
   }
 
   useEffect(() => {

@@ -4,7 +4,9 @@ import styled from 'styled-components';
 import { useNavigation } from '@react-navigation/native';
 import logo from '../../assets/images/logo.png'
 import { login } from '../../redux/actions/authActions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
+import {authReducer} from '../../redux/reducers/authReducer'
 
 const LoginScreen = () =>{
     
@@ -15,36 +17,33 @@ const LoginScreen = () =>{
     const [isValid, setIsValid] = useState(false);
     const [isFetching, setIsFetching] = useState(false);
 
+    const error = useSelector(state => state.authReducer.error)
+    const [err, setErr] = useState(error);
+
     useEffect(() => {
+        setErr(false)
         if(username?.length > 3 && password?.length > 3){
             setIsValid(true)
         }else{
             setIsValid(false)
         }
-    },[password]);
+    },[password, username]);
+
    
     const handleConnexion = async() => {
         if(isValid){
-        setIsFetching(true)
-            try{
-                await dispatch(login(username,password))
-                navigation.navigate("Home")
-            }catch(err){
-                setIsFetching(false)
-                Alert.alert("Incorrect username or password",
-                "The credentials that you've entered doesn't appear to belong to an account. Please check your credentials and try again.",
-                [
-                    {
-                    text: "Try again",
-                    },
-                ],)
-            }
+            setIsFetching(true)
+            await dispatch(login(username,password))
+            setIsFetching(false)
+            setErr(error)
         }
     }
 
     return(
     <Container>
+
         <Logo source={logo} />
+
         <TextInput
             placeholder="Phone number, email adress or username"
             placeholderTextColor={props => props.theme.ICON_SECONDARY_COLOR}
@@ -58,6 +57,7 @@ const LoginScreen = () =>{
             value={password}
             onChangeText={txt => setPassword(txt)}
         />
+
         <TouchableWithoutFeedback onPress={handleConnexion}>
             <Btn isValid={isValid}>
                 {
@@ -68,6 +68,9 @@ const LoginScreen = () =>{
                 }
             </Btn>
         </TouchableWithoutFeedback>
+
+        <Error> {err ? "Incorrect username or password. Please check and try again" : ""} </Error>
+
         <OrContainer>
             <Or/>
             <Text> OR </Text>
@@ -80,6 +83,7 @@ const LoginScreen = () =>{
                 <Text style={{color: '#00376b'}}>Register.</Text>
             </TouchableWithoutFeedback>
         </ForgotenContainer>
+
     </Container>
 )}
 
@@ -113,7 +117,6 @@ const Btn = styled.View`
     height: 45px;
     width: 90%;
     border-radius: 5px;
-    margin-bottom: 20px;
     align-items: center;
     justify-content: center;
     background-color: ${props => props.isValid ? props.theme.PRIMARY_COLOR : "#b2dffc"};
@@ -132,6 +135,7 @@ const Or = styled.View`
     height: 1px;
     width: 40%;
 `
+
 const Text = styled.Text`
     color: lightgray;
 `  
@@ -139,6 +143,11 @@ const Text = styled.Text`
 const ForgotenContainer = styled.View`
     flex-direction: row;
 ` 
+
+const Error = styled.Text`
+    color: ${props => props.theme.PRIMARY_COLOR};
+    font-size: 12px;
+`  
 
 
 export default LoginScreen;

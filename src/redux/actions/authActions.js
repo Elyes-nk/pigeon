@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from "axios";
 
+
 export const init = () => {
     return async dispatch => {
         let user = await AsyncStorage.getItem('user');
@@ -32,7 +33,12 @@ export const login = (username, password) => {
                 user: user.data
             })
         }catch(err){
-            console.log(err);
+            dispatch({
+                type: "LOGIN_FAILURE",
+                user: null,
+                error : true
+            })
+            console.log(err)
         }
     }
 };

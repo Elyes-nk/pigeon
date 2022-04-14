@@ -98,11 +98,11 @@ const BackImg = styled.ImageBackground`
 const UserInfo = styled.View`
   flex-direction: row;
   align-items: center;
-  margin-top: 30px;
+  margin-top: 20px;
   margin-left: 10px;
 `
 const UserName = styled.Text`
-  color: ${props => props.theme.TEXT_PRIMARY_COLOR};
+  color: ${props => props.theme.SECONDARY_COLOR};
   font-weight: 700;
   font-size: 14px;
   margin-left: 5px;
@@ -118,7 +118,7 @@ const BottomContainer = styled.View`
 `
 const IconsContainer = styled.View`
   flex-direction: row;
-  margin: 10px 10px 20px 10px;
+  margin: 10px 10px 10px 10px;
 `
 
 const MessageButton = styled.View`
@@ -141,7 +141,7 @@ const TextInputContainer = styled.View`
   padding-left: 10px;
   padding-right: 10px;
   border-radius: 50px;
-  height: 50px;
+  height: 40px;
 `
 
 export default StoryScreen;

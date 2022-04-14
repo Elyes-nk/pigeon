@@ -13,6 +13,7 @@ const ValidateStoryScreen = ({route}) => {
 
     const uploadUri = `${Platform.OS === "android" ? 'file://' : ''}${path}`
     const fileName = user.username + Date.now();
+    const newStory = [...user.stories, fileName]
 
     const navigation = useNavigation();
 
@@ -20,16 +21,18 @@ const ValidateStoryScreen = ({route}) => {
         console.log("letsssgooooo");
         const data = new FormData();
         data.append("file", {
-            uri: uploadUri,
-            name: "Elyes1649422408370",
+            file: uploadUri,
+            name: fileName,
             type: 'image/jpg',
           });
+          console.log(data);
+
         try {
-            await axios.post("https://pigeon-chat-app-api.herokuapp.com/api/upload",data)
-            await axios.put("https://pigeon-chat-app-api.herokuapp.com/api/users/",
+            const ress = await axios.post("https://pigeon-chat-app-api.herokuapp.com/api/upload",data)
+            console.log("envoie photo reussi",ress.data);
+            const res = await axios.put(`https://pigeon-chat-app-api.herokuapp.com/api/users/${user._id}`,
                 {
-                    id: user._id,
-                    stories : [...user.stories, fileName]
+                    stories : newStory
                 },{
                     headers: {
                         'token': user.accessToken,
@@ -37,7 +40,7 @@ const ValidateStoryScreen = ({route}) => {
                     }
                 }
             );
-            console.log("success");
+            console.log("edit user success",res.data);
         }catch(error) { 
             console.log("error",error);
             console.log("res",error.response);
