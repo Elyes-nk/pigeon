@@ -50,19 +50,18 @@ const StoryScreen = ({route}) => {
   }
 
   const activeStory = UserStories.stories[activeStoryIndex]
-
+console.log(activeStory);
 
   return (
     <Container>
       <TouchableWithoutFeedback onPress={handlePress}>
-        <BackImg source={{ uri : `https://pigeon-chat-app-api.herokuapp.com/img/${activeStory}`}}>
+        <BackImg source={{ uri : activeStory}}>
           <UserInfo>
             <ProfilePicture 
               uri={`https://pigeon-chat-app-api.herokuapp.com/img/${UserStories?.profilePic}`} 
               size={34} 
             />
             <UserName>{UserStories.username}</UserName>
-            <PostedTime>10 mn</PostedTime>
           </UserInfo>
           <BottomContainer>
             <IconsContainer>
@@ -107,12 +106,6 @@ const UserName = styled.Text`
   font-size: 14px;
   margin-left: 5px;
 `
-const PostedTime = styled.Text`
-  margin-left: 10px;
-  font-weight: 700;
-  color: ${props => props.theme.TEXT_SECONDARY_COLOR};
-  font-size: 13px;
-`
 const BottomContainer = styled.View`
   background-color: ${props => props.theme.BACKGROUND_COLOR};
 `
@@ -120,13 +113,11 @@ const IconsContainer = styled.View`
   flex-direction: row;
   margin: 10px 10px 10px 10px;
 `
-
 const MessageButton = styled.View`
   width: 50px;
   align-items: center;
   justify-content: center;
 `
-
 const TextInput = styled.TextInput`
   height: 100%;
   color: ${props => props.theme.DISCUSSION_COLOR};

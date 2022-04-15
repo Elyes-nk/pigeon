@@ -19,8 +19,11 @@ import RegisterScreen from '../screens/RegisterScreen'
 import {useDispatch, useSelector} from 'react-redux';
 import { init } from '../redux/actions/authActions';
 import { initTheme } from '../redux/actions/themeActions';
+import MessageImageScreen from '../screens/MessageImageScreen';
+import ValidateSendingImageInMessageScreen from '../screens/ValidateSendingImageInMessageScreen';
 
 const Router = () => { 
+  
   const user = useSelector((state) => state.authReducer.user);
   const theme = useSelector((state) => state.themeReducer.theme);
   const navigation = useNavigation();
@@ -148,6 +151,16 @@ const Router = () => {
           ),
         }}
       />
+      <RootStack.Screen
+        name="MessageImage"
+        component={MessageImageScreen}
+        options={{
+          headerShown: false,
+          headerStyle:{
+            backgroundColor: theme.BACKGROUND_COLOR,
+          },
+        }}
+      />   
        <RootStack.Screen
         name="Story"
         component={StoryScreen}
@@ -195,15 +208,25 @@ const Router = () => {
         }}
       />
        <RootStack.Screen
-        name="ValidateStory"
-        component={ValidateStoryScreen}
-        options={{
-          headerShown: false,
-          headerStyle:{
-            backgroundColor: theme.BACKGROUND_COLOR,
-          },
-        }}
-      />      
+          name="ValidateStory"
+          component={ValidateStoryScreen}
+          options={{
+            headerShown: false,
+            headerStyle:{
+              backgroundColor: theme.BACKGROUND_COLOR,
+            },
+          }}
+        />
+        <RootStack.Screen
+          name="ValidateSendingImageInMessage"
+          component={ValidateSendingImageInMessageScreen}
+          options={{
+            headerShown: false,
+            headerStyle:{
+              backgroundColor: theme.BACKGROUND_COLOR,
+            },
+          }}
+        />         
     </>
     :
     <>

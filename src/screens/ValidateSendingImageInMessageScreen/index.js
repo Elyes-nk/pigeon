@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components'
 import { SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import ValidateStoryFooter from '../../components/ValidateStoryFooter'
+import ValidateFooter from '../../components/ValidateFooter'
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 
@@ -63,7 +63,7 @@ const ValidateSendingImageInMessageScreen = ({route}) => {
     <SafeAreaView>
         <Container>
             <Img source={{uri : uploadUri}} >
-                <ValidateStoryFooter 
+                <ValidateFooter 
                     handleSubmit={handleSubmit}
                     isLoading={isLoading}
                     isStory={false}

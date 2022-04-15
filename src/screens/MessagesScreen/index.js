@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Keyboard, Dimensions, ActivityIndicator, Text } from 'react-native';
-import MessageSent from '../../components/MessageSent'
-import MessageRecieved from '../../components/MessageRecieved'
+import { Keyboard, Dimensions, ActivityIndicator } from 'react-native';
+import Message from '../../components/Message'
 import MessagesFooter from '../../components/MessagesFooter'
 import styled from 'styled-components';
 import { useSelector} from 'react-redux';
@@ -122,9 +121,19 @@ const MessagesScreen = ({route}) => {
             data={messages}
             renderItem={({item}) => 
                 item.sender === user._id ?
-                  <MessageSent message={item}/>
+                  <Message 
+                    message={item} 
+                    sent={true} 
+                    profilePic={user?.profilePic} 
+                    userSelected={userSelected}
+                  />
                 :
-                  <MessageRecieved profilePic={userSelected?.profilePic} message={item} />
+                  <Message 
+                    message={item} 
+                    sent={false} 
+                    profilePic={userSelected?.profilePic}
+                    userSelected={userSelected}
+                  />
             }
             keyExtractor={item => item._id}
             inverted
