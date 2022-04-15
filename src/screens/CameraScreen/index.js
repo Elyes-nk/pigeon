@@ -7,7 +7,13 @@ import RNFS from 'react-native-fs';
 import CameraFooter from '../../components/CameraFooter'
 import uuid from 'react-native-uuid';
 
-export default function CameraScreen() {
+export default function CameraScreen({route}) {
+
+    const  { params : {isStory, discussionId, userSelected} } = route;
+
+    console.log("isStroy",isStory);
+    console.log("discussionId",discussionId);
+
 
     const navigation = useNavigation();
     const [{ cameraRef }, { takePicture }] = useCamera(null);
@@ -19,7 +25,16 @@ export default function CameraScreen() {
             const filePath = data.uri;
             const newFilePath = RNFS.ExternalDirectoryPath + "/" + uuid.v4() + ".jpg";
             RNFS.moveFile(filePath, newFilePath).catch(error => { console.log(error);})
-            navigation.navigate("ValidateStory", { path : newFilePath})
+            if(isStory){
+                navigation.navigate("ValidateStory", { path : newFilePath})
+            }else{
+                navigation.navigate("ValidateSendingImageInMessageScreen", 
+                    { 
+                        path : newFilePath, 
+                        discussionId: discussionId, 
+                        userSelected: userSelected
+                    })
+            }
         } catch (error) {
             console.log(error);
         }

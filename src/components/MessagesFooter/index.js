@@ -6,15 +6,22 @@ import RoundedIcon from '../RoundedIcon'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
-function index({newMessage, setNewMessage, handleSubmit}) {
+function index({newMessage, setNewMessage, handleSubmit, discussionId, userSelected}) {
   return (
     <Footer>
-        <TouchableWithoutFeedback onPress={() => navigation.navigate("Gallery")}>
+        <TouchableWithoutFeedback onPress={() => navigation.navigate("Gallery", { isStory : false, discussionId: discussionId})}>
             <RoundedIcon color={props => props.theme.DISCUSSION_COLOR}>
                 <Ionicons name='image' size={20} color={props => props.theme.ICON_PRIMARY_COLOR} />
             </RoundedIcon>
         </TouchableWithoutFeedback>
-        <TouchableWithoutFeedback onPress={() => navigation.navigate("Camera")}>
+        <TouchableWithoutFeedback 
+            onPress={() => navigation.navigate("Camera", 
+                {
+                    isStory : false, 
+                    discussionId: discussionId,
+                    userSelected: userSelected
+                })}
+        >
             <RoundedIcon color={props => props.theme.DISCUSSION_COLOR}>
                 <FontAwesome name='camera' size={18} color={props => props.theme.ICON_PRIMARY_COLOR} />
             </RoundedIcon>

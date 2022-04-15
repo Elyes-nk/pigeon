@@ -2,9 +2,10 @@ import React,{useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Dimensions } from 'react-native'
 
-function index({text}) {
+function index({message}) {
     const [height, setHeight] = useState(40);
     const [width, setWidth] = useState(100);
+    let text = message.text
 
     const GetWidth = () => {
         if(text.length < 10){

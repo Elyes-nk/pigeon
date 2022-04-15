@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components'
 import { SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import ValidateFooter from '../../components/ValidateFooter'
+import ValidateStoryFooter from '../../components/ValidateStoryFooter'
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 
-const ValidateStoryScreen = ({route}) => {
-    
+const ValidateSendingImageInMessageScreen = ({route}) => {
+        
     const [isLoading, setisLoading] = useState(false);
     const user = useSelector(state => state.authReducer.user)
-    const  { params : {path} } = route;
+    const  { params : { path, discussionId, userSelected } } = route;
     const navigation = useNavigation();
 
     const uploadUri = `${Platform.OS === "android" ? 'file://' : ''}${path}`
@@ -36,24 +36,26 @@ const ValidateStoryScreen = ({route}) => {
             body:data
         })
         .then(res=> res.json())
-        .then(data=> handleCreateStory(data.secure_url))
+        .then(data=> handleSendMessage(data.secure_url))
         .catch(err=> console.log(err))
     }
 
-    const handleCreateStory = async (uri) => {
-        const newStory = [...user.stories, uri]
+
+    const handleSendMessage = async(url) => {
         try {
-            const res = await axios.put(`https://pigeon-chat-app-api.herokuapp.com/api/users/${user._id}`,
+            const res = await axios.post(`https://pigeon-chat-app-api.herokuapp.com/api/messages`,
             {
-                stories : newStory
+                discussionId: discussionId,
+                image: url,
+                sender: user._id
             },
             {
-                headers: { 'token': user.accessToken, }
-            });
+                headers: {'token': user.accessToken}
+            })
             setisLoading(false)
-            navigation.navigate("Home")
-        } catch (error) {
-            console.log(error);
+            navigation.navigate("Messages", {userSelected: userSelected})
+        } catch (err) {
+            console.log(err);
         }
     }
 
@@ -61,10 +63,10 @@ const ValidateStoryScreen = ({route}) => {
     <SafeAreaView>
         <Container>
             <Img source={{uri : uploadUri}} >
-                <ValidateFooter 
+                <ValidateStoryFooter 
                     handleSubmit={handleSubmit}
                     isLoading={isLoading}
-                    isStory={true}
+                    isStory={false}
                 />
             </Img>
         </Container>  
@@ -81,4 +83,4 @@ const Img = styled.ImageBackground`
     width: 100%;
 `
 
-export default ValidateStoryScreen;
+export default ValidateSendingImageInMessageScreen;

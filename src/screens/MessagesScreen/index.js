@@ -122,14 +122,20 @@ const MessagesScreen = ({route}) => {
             data={messages}
             renderItem={({item}) => 
                 item.sender === user._id ?
-                  <MessageSent text={item.text}/>
+                  <MessageSent message={item}/>
                 :
-                  <MessageRecieved profilePic={userSelected?.profilePic} text={item.text} />
+                  <MessageRecieved profilePic={userSelected?.profilePic} message={item} />
             }
             keyExtractor={item => item._id}
             inverted
           />
-          <MessagesFooter newMessage={newMessage} setNewMessage={setNewMessage} handleSubmit={handleSubmit} />
+          <MessagesFooter 
+            newMessage={newMessage} 
+            setNewMessage={setNewMessage} 
+            handleSubmit={handleSubmit} 
+            discussionId={discussionId}
+            userSelected={userSelected}
+          />
         </>
     }
   </>

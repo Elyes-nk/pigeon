@@ -2,9 +2,10 @@ import React,{useState, useEffect } from 'react'
 import styled from 'styled-components'
 import ProfilePicture from '../ProfilePicture';
 
-function index({text, profilePic}) {
+function index({message, profilePic}) {
     const [height, setHeight] = useState(40);
     const [width, setWidth] = useState(100);
+    let text = message.text
 
     useEffect(() => {
         GetWidth()

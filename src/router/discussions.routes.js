@@ -48,12 +48,12 @@ const DiscussionsRoutes = () => {
           ),
           headerRight: () => (
             <ContainerRight>
-              <TouchableWithoutFeedback onPress={() => navigation.navigate("Gallery")}>
+              <TouchableWithoutFeedback onPress={() => navigation.navigate("Gallery", { isStory : true})}>
                 <RoundedIcon color={theme.DISCUSSION_COLOR}>
                   <Ionicons name='image' size={20} color={theme.TEXT_PRIMARY_COLOR} />
                 </RoundedIcon>
               </TouchableWithoutFeedback>
-              <TouchableWithoutFeedback onPress={() => navigation.navigate("Camera")}>
+              <TouchableWithoutFeedback onPress={() => navigation.navigate("Camera", { isStory : true})}>
                 <RoundedIcon color={theme.DISCUSSION_COLOR}>
                   <FontAwesome name='camera' size={18} color={theme.TEXT_PRIMARY_COLOR} />
                 </RoundedIcon>
