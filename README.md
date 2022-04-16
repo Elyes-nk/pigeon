@@ -2,7 +2,7 @@
     <img height="250" src="https://cdn-icons-png.flaticon.com/512/134/134914.png">
 </h1>
 
-# 📝 🕊 Pigeon Front
+# 📝 🕊 Pigeon mobile app
 *Front end of a chat mobile app created by `Elyes Nait kaci.`*
 
 ## Technos
