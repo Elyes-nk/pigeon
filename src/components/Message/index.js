@@ -110,9 +110,8 @@ const Image = styled.Image`
     width: 90px;
     height: 90px;
     border-radius: 5px;
-    object-fit: cover;
     margin-right: 10px;
-    background-color: red;
+    background-color: lightgray;
 `
 
 const MessageTextReceived = styled.Text`

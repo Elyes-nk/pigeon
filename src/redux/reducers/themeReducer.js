@@ -1,7 +1,8 @@
 import { light } from '../../theme/Themes'
 
 const initialState = {
-    theme : light
+    theme : light,
+    systemeSelected : false
 }
 
 const themeReducer = (state = initialState, action) => {
@@ -9,10 +10,12 @@ const themeReducer = (state = initialState, action) => {
         case "INIT_THEME":
             return {
                 theme: action.theme,
+                systemeSelected: action.systemeSelected
             };
         case "SWITCH_THEME":
             return { 
-                theme : action.theme 
+                theme : action.theme,
+                systemeSelected: action.systemeSelected
             };
         default:
             return state;
