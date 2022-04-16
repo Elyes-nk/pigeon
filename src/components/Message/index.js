@@ -2,12 +2,18 @@ import React,{useState, useEffect } from 'react'
 import styled from 'styled-components'
 import ProfilePicture from '../ProfilePicture';
 import { format } from "timeago.js";
-import { TouchableWithoutFeedback } from 'react-native';
+import { TouchableWithoutFeedback, Linking } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 function index({message, profilePic, sent, userSelected}) {
 
     const navigation = useNavigation()
+
+    const handleLink = (text) => {
+        if(message.text.includes("http")){
+            Linking.openURL(text)
+        }
+    }
   
   return (
     <>
@@ -22,7 +28,9 @@ function index({message, profilePic, sent, userSelected}) {
                         </TouchableWithoutFeedback>
                     :
                         <MessageContainer>
-                            <MessageTextSent>{message.text}</MessageTextSent>
+                            <TouchableWithoutFeedback onPress={() => handleLink(message.text)}>
+                                <MessageTextSent>{message.text}</MessageTextSent>
+                            </TouchableWithoutFeedback>
                         </MessageContainer>
                     }
                     <MessageBottom>{format(message.createdAt)}</MessageBottom>

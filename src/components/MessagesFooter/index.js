@@ -1,15 +1,69 @@
 import React from 'react'
-import { TouchableWithoutFeedback  } from 'react-native';
+import { TouchableWithoutFeedback, PermissionsAndroid, Platform } from 'react-native';
 import styled from 'styled-components'
 import { Dimensions  } from 'react-native';
 import RoundedIcon from '../RoundedIcon'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { useNavigation } from '@react-navigation/native';
+import Geolocation from '@react-native-community/geolocation';
 
 function index({newMessage, setNewMessage, handleSubmit, discussionId, userSelected}) {
+
     const navigation = useNavigation()
-  return (
+   
+
+    const requestLocationPermission = async () => {
+        setNewMessage("Checking location...")
+        if (Platform.OS === 'ios') {
+            getOneTimeLocation();
+        } else {
+            try {
+                const granted = await PermissionsAndroid.request(
+                PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+                {
+                    title: 'Location Access Required',
+                    message: 'This App needs to Access your location',
+                },
+                );
+                if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                    getOneTimeLocation();
+                    // subscribeLocationLocation();
+                } else {
+                    setNewMessage('Permission Denied');
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        }
+    };
+       
+    
+    const getOneTimeLocation = () => {
+        setNewMessage('Getting Location ...');
+        Geolocation.getCurrentPosition(
+            (position) => {    
+                const currentLongitude = 
+                    JSON.stringify(position.coords.longitude);
+
+                const currentLatitude = 
+                    JSON.stringify(position.coords.latitude);
+
+                setNewMessage('https://www.google.com/maps/search/?api=1&query='+currentLatitude+','+currentLongitude)
+            },
+            (error) => {
+                console.log(error);
+                setNewMessage("")
+            },
+            {
+                enableHighAccuracy: false,
+                timeout: 30000,
+                maximumAge: 1000
+            },
+        );
+    };
+   
+    return (
     <Footer>
 
         <RoundedIcon color={props => props.theme.DISCUSSION_COLOR}>
@@ -44,6 +98,13 @@ function index({newMessage, setNewMessage, handleSubmit, discussionId, userSelec
         </RoundedIcon>
 
 
+        <RoundedIcon color={props => props.theme.DISCUSSION_COLOR}>
+            <TouchableWithoutFeedback onPress={() => requestLocationPermission()}>    
+                <FontAwesome name='map-marker' size={18} color={props => props.theme.ICON_PRIMARY_COLOR} />
+            </TouchableWithoutFeedback>
+        </RoundedIcon>
+
+
         <TextInputContainer>
             <TextInput 
                 placeholder='Type your message...'
@@ -52,7 +113,7 @@ function index({newMessage, setNewMessage, handleSubmit, discussionId, userSelec
                 value={newMessage}
             />
         </TextInputContainer>
-
+        
 
         <TouchableWithoutFeedback onPress={() => handleSubmit()}>
             <Send>Send</Send>
@@ -79,10 +140,10 @@ const TextInputContainer = styled.View`
     margin-left: 10px;
     margin-right: 10px;
     height: 40px;
-    width: ${Dimensions.get('window').width - 150}px;
+    width: ${Dimensions.get('window').width - 210}px;
     border-radius: 20px;
     background-color: ${props => props.theme.DISCUSSION_COLOR};
-    padding-left: 10px;
+    padding-left: 5px;
 `
 const Send = styled.Text`
     color: ${props => props.theme.PRIMARY_COLOR};
