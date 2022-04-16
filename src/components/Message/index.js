@@ -56,7 +56,9 @@ function index({message, profilePic, sent, userSelected}) {
                         </TouchableWithoutFeedback>
                     :
                          <MessageContainer>
-                            <MessageTextReceived>{message.text}</MessageTextReceived>
+                            <TouchableWithoutFeedback onPress={() => handleLink(message.text)}>
+                                <MessageTextReceived>{message.text}</MessageTextReceived>
+                            </TouchableWithoutFeedback>
                         </MessageContainer>
                     }
                    
