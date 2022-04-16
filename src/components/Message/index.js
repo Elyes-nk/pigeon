@@ -28,14 +28,14 @@ function index({message, profilePic, sent, userSelected}) {
                     <MessageBottom>{format(message.createdAt)}</MessageBottom>
                 </ContainerSent>
                 <ProfilePicture 
-                    uri={`https://pigeon-chat-app-api.herokuapp.com/img/${profilePic}`} 
+                    uri={profilePic} 
                     size={40} 
                 />
             </Container>
         :
             <Container>
                 <ProfilePicture 
-                    uri={`https://pigeon-chat-app-api.herokuapp.com/img/${profilePic}`} 
+                    uri={profilePic} 
                     size={40} 
                 />
                

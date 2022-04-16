@@ -67,20 +67,22 @@ const MessagesScreen = ({route}) => {
 
 
   const handleSubmit = async () => {
-    try {
-      const res = await axios.post(`https://pigeon-chat-app-api.herokuapp.com/api/messages`,
-      {
-        discussionId: discussionId,
-        text: newMessage,
-        sender: user._id
-      },
-      {
-        headers: {'token': user.accessToken}
-      })
-      getMessages(discussionId)
-      setNewMessage("")
-    } catch (err) {
-      console.log(err);
+    if(newMessage.length > 1){
+      try {
+        const res = await axios.post(`https://pigeon-chat-app-api.herokuapp.com/api/messages`,
+        {
+          discussionId: discussionId,
+          text: newMessage,
+          sender: user._id
+        },
+        {
+          headers: {'token': user.accessToken}
+        })
+        getMessages(discussionId)
+        setNewMessage("")
+      } catch (err) {
+        console.log(err);
+      }
     }
   }
 

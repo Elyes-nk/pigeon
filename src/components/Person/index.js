@@ -12,7 +12,7 @@ const Person = ({person}) => {
   return (
     <TouchableWithoutFeedback onPress={() => navigation.navigate("Messages", {userSelected: person}) }>
       <Container>
-          <ProfilePicture uri={`https://pigeon-chat-app-api.herokuapp.com/img/${person?.profilePic}`} size={55} />
+          <ProfilePicture uri={person?.profilePic} size={55} />
           <Name>{person?.username}</Name>
       </Container>
     </TouchableWithoutFeedback>
@@ -29,7 +29,7 @@ const Container = styled.View`
 `
 
 const Name = styled.Text`
-  font-size: 17px;
+  font-size: 16px;
   color: ${props => props.theme.TEXT_PRIMARY_COLOR};
   margin:10px;
 `

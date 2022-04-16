@@ -21,6 +21,7 @@ import { init } from '../redux/actions/authActions';
 import { initTheme } from '../redux/actions/themeActions';
 import MessageImageScreen from '../screens/MessageImageScreen';
 import ValidateSendingImageInMessageScreen from '../screens/ValidateSendingImageInMessageScreen';
+import ValidateProfilePictureScreen from '../screens/ValidateProfilePictureScreen';
 
 const Router = () => { 
   
@@ -184,7 +185,7 @@ const Router = () => {
               <TouchableWithoutFeedback onPress={() => navigation.navigate("Home")}> 
                 <AntDesign name="left" size={28} color={theme.TEXT_PRIMARY_COLOR}/>
               </TouchableWithoutFeedback>
-              <Title>Story</Title>
+              <Title>Camera</Title>
             </ContainerLeft>
           ),
         }}
@@ -226,7 +227,17 @@ const Router = () => {
               backgroundColor: theme.BACKGROUND_COLOR,
             },
           }}
-        />         
+        />     
+         <RootStack.Screen
+          name="ValidateProfilePicture"
+          component={ValidateProfilePictureScreen}
+          options={{
+            headerShown: false,
+            headerStyle:{
+              backgroundColor: theme.BACKGROUND_COLOR,
+            },
+          }}
+        />        
     </>
     :
     <>

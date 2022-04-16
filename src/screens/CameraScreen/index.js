@@ -9,11 +9,7 @@ import uuid from 'react-native-uuid';
 
 export default function CameraScreen({route}) {
 
-    const  { params : {isStory, discussionId, userSelected} } = route;
-
-    console.log("isStroy",isStory);
-    console.log("discussionId",discussionId);
-
+    const  { params : {isStory, isMessage, discussionId, userSelected} } = route;
 
     const navigation = useNavigation();
     const [{ cameraRef }, { takePicture }] = useCamera(null);
@@ -27,7 +23,8 @@ export default function CameraScreen({route}) {
             RNFS.moveFile(filePath, newFilePath).catch(error => { console.log(error);})
             if(isStory){
                 navigation.navigate("ValidateStory", { path : newFilePath})
-            }else{
+            }
+            if(isMessage){
                 navigation.navigate("ValidateSendingImageInMessageScreen", 
                     { 
                         path : newFilePath, 

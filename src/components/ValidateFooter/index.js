@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import { ActivityIndicator } from 'react-native';
 
-function ValidateFooter({handleSubmit, isLoading, isStory}) {
+function ValidateFooter({handleSubmit, isLoading, isStory, isMessage, isProfilePicture}) {
 
     const user = useSelector(state => state.authReducer.user)
     const theme = useSelector(state => state.themeReducer.theme)
@@ -20,15 +20,13 @@ function ValidateFooter({handleSubmit, isLoading, isStory}) {
                     {!isLoading? 
                         <>
                             <ProfilePicture 
-                                uri={`https://pigeon-chat-app-api.herokuapp.com/img/${user?.profilePic}`} 
+                                uri={user?.profilePic} 
                                 size={33} 
                             />                
                             <TouchableWithoutFeedback onPress={handleSubmit}>
-                                {isStory ?
-                                    <TextMessage>Your stories</TextMessage>     
-                                    :
-                                    <TextMessage>Send in message</TextMessage>     
-                                }
+                                {isStory && <TextMessage>Your stories</TextMessage>  }   
+                                {isMessage && <TextMessage>Send in message</TextMessage> }
+                                {isProfilePicture && <TextMessage>Edit profile picture</TextMessage> }
                             </TouchableWithoutFeedback>
                         </>
                     :
@@ -59,7 +57,7 @@ const IconsContainer = styled.View`
 const TextContainer = styled.View`
     flex-direction: row;
     justify-content: center;
-    background-color: ${props => props.theme.ICON_PRIMARY_COLOR};
+    background-color: black;
     align-items: center;
     margin-left: 10px;
     margin-right: 10px;
@@ -81,7 +79,7 @@ const Icon = styled.View`
     align-items: center;
     justify-content: center;
     border-radius: 45px; 
-    background-color: ${props => props.theme.ICON_PRIMARY_COLOR};
+    background-color: black;
 `
 
 export default ValidateFooter

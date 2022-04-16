@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { ActivityIndicator, TouchableWithoutFeedback, Dimensions, SafeAreaView } from 'react-native';
-import AntDesign from 'react-native-vector-icons/AntDesign'
-import Ionicons from 'react-native-vector-icons/Ionicons'
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import ProfilePicture from "../../components/ProfilePicture";
@@ -9,7 +7,6 @@ import ProfilePicture from "../../components/ProfilePicture";
 const StoryScreen = ({route}) => {
 
   const users = useSelector(state => state.usersReducer.users)
-  const theme = useSelector(state => state.themeReducer.theme)
 
 
   const [activeStoryIndex, setActiveStoryIndex] = useState(0);
@@ -50,7 +47,6 @@ const StoryScreen = ({route}) => {
   }
 
   const activeStory = UserStories.stories[activeStoryIndex]
-console.log(activeStory);
 
   return (
     <Container>
@@ -58,28 +54,11 @@ console.log(activeStory);
         <BackImg source={{ uri : activeStory}}>
           <UserInfo>
             <ProfilePicture 
-              uri={`https://pigeon-chat-app-api.herokuapp.com/img/${UserStories?.profilePic}`} 
+              uri={UserStories?.profilePic} 
               size={34} 
             />
             <UserName>{UserStories.username}</UserName>
           </UserInfo>
-          <BottomContainer>
-            <IconsContainer>
-              <TextInputContainer>
-                <TextInput
-                  editable
-                  placeholder="Send message"
-                  placeholderTextColor={theme.TEXT_PRIMARY_COLOR}
-                />
-              </TextInputContainer>
-              <MessageButton>
-                <AntDesign name="hearto" size={25} color={theme.TEXT_PRIMARY_COLOR} />
-              </MessageButton>
-              <MessageButton>
-                <Ionicons name="paper-plane-outline" size={25} color={theme.TEXT_PRIMARY_COLOR} />
-              </MessageButton>
-            </IconsContainer>
-          </BottomContainer>
         </BackImg>
       </TouchableWithoutFeedback>
     </Container>
@@ -105,34 +84,6 @@ const UserName = styled.Text`
   font-weight: 700;
   font-size: 14px;
   margin-left: 5px;
-`
-const BottomContainer = styled.View`
-  background-color: ${props => props.theme.BACKGROUND_COLOR};
-`
-const IconsContainer = styled.View`
-  flex-direction: row;
-  margin: 10px 10px 10px 10px;
-`
-const MessageButton = styled.View`
-  width: 50px;
-  align-items: center;
-  justify-content: center;
-`
-const TextInput = styled.TextInput`
-  height: 100%;
-  color: ${props => props.theme.DISCUSSION_COLOR};
-  font-size: 14px;
-`
-const TextInputContainer = styled.View`
-  flex: 1;
-  border-width: 1;
-  border-color: gray;
-  margin-left: 10px;
-  margin-right: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
-  border-radius: 50px;
-  height: 40px;
 `
 
 export default StoryScreen;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components'
 import { SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
@@ -8,9 +8,10 @@ import axios from 'axios';
 
 const ValidateSendingImageInMessageScreen = ({route}) => {
         
+    const  { params : { path, discussionId, userSelected } } = route;
+
     const [isLoading, setisLoading] = useState(false);
     const user = useSelector(state => state.authReducer.user)
-    const  { params : { path, discussionId, userSelected } } = route;
     const navigation = useNavigation();
 
     const uploadUri = `${Platform.OS === "android" ? 'file://' : ''}${path}`
@@ -67,6 +68,8 @@ const ValidateSendingImageInMessageScreen = ({route}) => {
                     handleSubmit={handleSubmit}
                     isLoading={isLoading}
                     isStory={false}
+                    isMessage={true}
+                    isProfilePicture={false}
                 />
             </Img>
         </Container>  

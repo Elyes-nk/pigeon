@@ -39,7 +39,7 @@ const DiscussionsRoutes = () => {
             <ContainerLeft>
               <TouchableWithoutFeedback onPress={() => navigation.navigate("Profile")}> 
                 <ProfilePicture 
-                  uri={`https://pigeon-chat-app-api.herokuapp.com/img/${user?.profilePic}`} 
+                  uri={user?.profilePic} 
                   size={33} 
                 />
               </TouchableWithoutFeedback>
@@ -48,12 +48,22 @@ const DiscussionsRoutes = () => {
           ),
           headerRight: () => (
             <ContainerRight>
-              <TouchableWithoutFeedback onPress={() => navigation.navigate("Gallery", { isStory : true})}>
+              <TouchableWithoutFeedback onPress={() => navigation.navigate("Gallery", 
+                { 
+                  isStory : true,
+                  isMessage : false,
+                  isProfilePicture : false
+                })}>
                 <RoundedIcon color={theme.DISCUSSION_COLOR}>
                   <Ionicons name='image' size={20} color={theme.TEXT_PRIMARY_COLOR} />
                 </RoundedIcon>
               </TouchableWithoutFeedback>
-              <TouchableWithoutFeedback onPress={() => navigation.navigate("Camera", { isStory : true})}>
+              <TouchableWithoutFeedback onPress={() => navigation.navigate("Camera", 
+                { 
+                  isStory : true,
+                  isMessage : false,
+                  isProfilePicture : false
+                })}>
                 <RoundedIcon color={theme.DISCUSSION_COLOR}>
                   <FontAwesome name='camera' size={18} color={theme.TEXT_PRIMARY_COLOR} />
                 </RoundedIcon>

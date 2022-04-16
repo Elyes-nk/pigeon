@@ -6,11 +6,12 @@ import ValidateFooter from '../../components/ValidateFooter'
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 
-const ValidateStoryScreen = ({route}) => {
-    
+const ValidateProfilePictureScreen = ({route}) => {
+        
+    const  { params : { path } } = route;
+
     const [isLoading, setisLoading] = useState(false);
     const user = useSelector(state => state.authReducer.user)
-    const  { params : {path} } = route;
     const navigation = useNavigation();
 
     const uploadUri = `${Platform.OS === "android" ? 'file://' : ''}${path}`
@@ -36,24 +37,24 @@ const ValidateStoryScreen = ({route}) => {
             body:data
         })
         .then(res=> res.json())
-        .then(data=> handleCreateStory(data.secure_url))
+        .then(data=> handleSendMessage(data.secure_url))
         .catch(err=> console.log(err))
     }
 
-    const handleCreateStory = async (uri) => {
-        const newStory = [...user.stories, uri]
+
+    const handleSendMessage = async(url) => {
         try {
             const res = await axios.put(`https://pigeon-chat-app-api.herokuapp.com/api/users/${user._id}`,
             {
-                stories : newStory
+                profilePic: url,
             },
             {
-                headers: { 'token': user.accessToken, }
-            });
+                headers: {'token': user.accessToken}
+            })
             setisLoading(false)
-            navigation.navigate("Home")
-        } catch (error) {
-            console.log(error);
+            navigation.navigate("Profile")
+        } catch (err) {
+            console.log(err);
         }
     }
 
@@ -64,9 +65,9 @@ const ValidateStoryScreen = ({route}) => {
                 <ValidateFooter 
                     handleSubmit={handleSubmit}
                     isLoading={isLoading}
-                    isStory={true}
+                    isStory={false}
                     isMessage={false}
-                    isProfilePicture={false}
+                    isProfilePicture={true}
                 />
             </Img>
         </Container>  
@@ -83,4 +84,4 @@ const Img = styled.ImageBackground`
     width: 100%;
 `
 
-export default ValidateStoryScreen;
+export default ValidateProfilePictureScreen;

@@ -28,7 +28,7 @@ const Story = ({user}) => {
     <Container >
        <TouchableWithoutFeedback onPress={onPress}> 
         <ProfilePicture 
-          uri={`https://pigeon-chat-app-api.herokuapp.com/img/${user?.profilePic}`} 
+          uri={user?.profilePic} 
           size={60} />
       </TouchableWithoutFeedback>
       <TextName>{username}</TextName> 

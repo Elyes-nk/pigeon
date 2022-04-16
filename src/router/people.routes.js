@@ -48,7 +48,7 @@ const PeopleRoutes = () => {
             <ContainerLeft>
               <TouchableWithoutFeedback onPress={() => navigation.navigate("Profile")}> 
                 <ProfilePicture 
-                  uri={`https://pigeon-chat-app-api.herokuapp.com/img/${user?.profilePic}`} 
+                  uri={user?.profilePic} 
                   size={33} 
                 />
               </TouchableWithoutFeedback>

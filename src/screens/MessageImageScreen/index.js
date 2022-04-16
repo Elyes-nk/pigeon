@@ -56,6 +56,6 @@ const Icon = styled.View`
     align-items: center;
     justify-content: center;
     border-radius: 45px; 
-    background-color: ${props => props.theme.ICON_PRIMARY_COLOR};
+    background-color: black;
 `
 export default MessageImageScreen;

@@ -5,29 +5,40 @@
 # 📝 🕊 Pigeon Front
 *Front end of my chat mobile app .*
 
-## Techno
+## Technos
 - React native
 - Redux
 - Styled components
 
 ## Project content
+
+# Authentification 
+*Persistent User Login Authentication with Redux, JWT Tokens And AsyncStorage*
 - Login
 - Register
-- Users
-- Messages
-- Stories
+
+# Features 
+- View all users
+- Send messages
+- Send image in message
+- View users stories
+- Create story
+- Send localisation link to another user 
+- Edit username
+- Edit profile picture
+
+# Themes 
+*Persistent Theme with Redux And AsyncStorage*
+- Choose between Light and Dark
 
 
-# Project structure
-
+## Project structure
 
 ```shell
 ├── src
 │   ├── assets
 │   │   └── ...
 │   ├── components
-│   │   └──  ...
-│   ├── context
 │   │   └──  ...
 │   ├── redux
 │   │   └──  ...  
@@ -38,6 +49,6 @@
 │   ├── theme
 │       └──  ...
 ├──  index.js
-├──  _app.js
+├──  App.js
 └──  package.json
 ```

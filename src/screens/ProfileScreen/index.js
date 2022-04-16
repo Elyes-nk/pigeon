@@ -9,6 +9,7 @@ import styled from 'styled-components';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../redux/actions/authActions';
+import Feather from "react-native-vector-icons/Feather"
 
 const ProfileScreen = () =>{
 
@@ -27,9 +28,18 @@ const ProfileScreen = () =>{
     <Container>
         <ContainerTop>
             <ProfilePicture 
-                uri={`https://pigeon-chat-app-api.herokuapp.com/img/${user?.profilePic}`} 
+                uri={user?.profilePic} 
                 size={100}
             />
+            <TouchableWithoutFeedback onPress={() => navigation.navigate("Gallery", 
+                { 
+                    isStory : false,
+                    isMessage : false,
+                    isProfilePicture : true,
+                })}
+            >
+                <Feather name="edit" size={20} color="gray"/>
+            </TouchableWithoutFeedback>
             <Title>{user?.username}</Title>
         </ContainerTop>
         <ContainerBottom>

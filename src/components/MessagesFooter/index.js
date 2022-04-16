@@ -5,27 +5,45 @@ import { Dimensions  } from 'react-native';
 import RoundedIcon from '../RoundedIcon'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import { useNavigation } from '@react-navigation/native';
 
 function index({newMessage, setNewMessage, handleSubmit, discussionId, userSelected}) {
+    const navigation = useNavigation()
   return (
     <Footer>
-        <TouchableWithoutFeedback onPress={() => navigation.navigate("Gallery", { isStory : false, discussionId: discussionId})}>
-            <RoundedIcon color={props => props.theme.DISCUSSION_COLOR}>
-                <Ionicons name='image' size={20} color={props => props.theme.ICON_PRIMARY_COLOR} />
-            </RoundedIcon>
-        </TouchableWithoutFeedback>
-        <TouchableWithoutFeedback 
-            onPress={() => navigation.navigate("Camera", 
-                {
-                    isStory : false, 
+
+        <RoundedIcon color={props => props.theme.DISCUSSION_COLOR}>
+            <TouchableWithoutFeedback 
+            onPress={() => navigation.navigate("Gallery", 
+                { 
+                    isStory : false,
+                    isMessage : true,
+                    isProfilePicture : false,
                     discussionId: discussionId,
                     userSelected: userSelected
                 })}
-        >
-            <RoundedIcon color={props => props.theme.DISCUSSION_COLOR}>
+            >
+                <Ionicons name='image' size={20} color={props => props.theme.ICON_PRIMARY_COLOR} />
+            </TouchableWithoutFeedback>
+        </RoundedIcon>
+    
+
+        <RoundedIcon color={props => props.theme.DISCUSSION_COLOR}>
+            <TouchableWithoutFeedback 
+                onPress={() => navigation.navigate("Camera", 
+                    {
+                        isStory : false, 
+                        isMessage : true,
+                        isProfilePicture : false,
+                        discussionId: discussionId,
+                        userSelected: userSelected
+                    })}
+            >    
                 <FontAwesome name='camera' size={18} color={props => props.theme.ICON_PRIMARY_COLOR} />
-            </RoundedIcon>
-        </TouchableWithoutFeedback>
+            </TouchableWithoutFeedback>
+        </RoundedIcon>
+
+
         <TextInputContainer>
             <TextInput 
                 placeholder='Type your message...'
@@ -34,9 +52,13 @@ function index({newMessage, setNewMessage, handleSubmit, discussionId, userSelec
                 value={newMessage}
             />
         </TextInputContainer>
+
+
         <TouchableWithoutFeedback onPress={() => handleSubmit()}>
             <Send>Send</Send>
         </TouchableWithoutFeedback>
+
+
     </Footer>
   )
 }
