@@ -3,21 +3,24 @@
 </h1>
 
 # 📝 🕊 Pigeon Front
-*Front end of my chat mobile app .*
+*Front end of a chat mobile app created by `Elyes Nait kaci`*
 
 ## Technos
 - React native
 - Redux
 - Styled components
 
-## Project content
+## Backend
+link : [https://github.com/Elyes-nk/pigeon-api]
 
-# Authentification 
+# Project content
+
+## Authentification 
 *Persistent User Login Authentication with Redux, JWT Tokens And AsyncStorage*
 - Login
 - Register
 
-# Features 
+## Features 
 - View all users
 - Send messages
 - Send image in message
@@ -27,12 +30,12 @@
 - Edit username
 - Edit profile picture
 
-# Themes 
+## Themes 
 *Persistent Theme with Redux And AsyncStorage*
 - Choose between Light and Dark
 
 
-## Project structure
+# Project structure
 
 ```shell
 ├── src
