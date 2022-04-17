@@ -36,12 +36,23 @@ const DiscussionsScreen = () => {
           <ActivityIndicator/>
         </Container>
         :
+        discussions.length > 0 ?
         <WhiteFlatList
           data={discussions}
           renderItem={({item}) => <Discussion discussion={item} />}
           keyExtractor={item => item?._id}
           ListHeaderComponent={Stories}
         />
+        :
+        <WhiteFlatList
+          data={[{
+            id:1,
+            text:"You don't have any discussion"
+          }]}
+          renderItem={({item}) => <Text>{item.text}</Text>}
+          keyExtractor={item => item?._id}
+          ListHeaderComponent={Stories}
+      />
       }
     </>
 )}
@@ -55,6 +66,13 @@ const Container = styled.View`
   background-color: ${props => props.theme.BACKGROUND_COLOR};
   align-items: center;
   justify-content: center;
+`
+
+const Text = styled.Text`
+  margin-top: 20px;
+  margin-left: 10px;
+  font-size: 16px;
+  color: lightgray;
 `
 
 export default DiscussionsScreen;

@@ -3,7 +3,7 @@
 </h1>
 
 # 📝 🕊 Pigeon mobile app
-*Front end of a chat mobile app created by `Elyes Nait kaci.`*
+*ANDROID chat app created by `Elyes Nait kaci.`*
 
 ## Technos
 - React native
