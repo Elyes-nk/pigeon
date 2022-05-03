@@ -17,10 +17,6 @@ https://user-images.githubusercontent.com/59204034/163718980-3521785c-2db6-4696-
 - Custom Node Js server hosted in Heroku : [https://github.com/Elyes-nk/pigeon-api]
 - Store and deliver images with Cloudinary, a cloud-based image and video management services.
 
-## Test it
-- Username : Hikkary
-- Password : Hikkary
-
 # Project content
 
 ## Authentification 
